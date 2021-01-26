@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <input type="button" value="GET" onclick="get()" />
+    <br/>
+    <input type="button" value="lambda" onclick="post()" />
+
+    <script type="text/javascript" language="javascript">
+        // 버튼 GET
+        const URL = "https://8w0c5ure7i.execute-api.ap-northeast-2.amazonaws.com/2020-12-28/board";
+        function get() {
+            fetch(URL,{
+                headers:{
+                    'Accept':'application/json'
+                }
+            }).then(res=>res.json())
+            .then(data=>console.log(data))
+            .catch(err=>console.error(err))
+        }
+
+        // 버튼 lambda
+        function post(){
+            console.log('lambda function call test')
+
+            var trans_object = {
+                'data': 'websend',
+                'data2': 23
+            }
+            var trans_json = JSON.stringify(trans_object);
+            
+            $.ajax({
+                url: "https://uirpo296o3.execute-api.ap-northeast-2.amazonaws.com/2020-01-02/ruby",
+                type: 'POST',
+                dataType: 'json',
+                data: trans_json,
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                beforeSend: function () {
+                    $('.wrap-loading').removeClass('display-none');
+                },
+                complete: function () {
+                    $('.wrap-loading').addClass('display-none');
+                },
+                success: function (retVal) {
+                    alert('name: ' + retVal.name + ' / cnt: ' + retVal.cnt);
+                    console.log(retVal)
+                },
+                error: function (retVal, status, er) {
+                    alert("error: " + retVal + " status: " + status + " er:" + er);
+                }
+            });
+        }
+    </script>
+    <br/>
+
+    <!-- <input type="button" value="sendbox" onclick="sendbox()" />
+    <input type="text" id="txtbox" />
+    <script type="text/javascript" language="javascript">
+        // 버튼 sendbox
+        function sendbox() {
+            const txtbox = document.getElementById('txtbox').value;
+            var trans_json = JSON.stringify(txtbox);
+            console.log(trans_json)
+
+            $.ajax({
+                url: "https://uirpo296o3.execute-api.ap-northeast-2.amazonaws.com/2020-01-02/ruby",
+                type: 'POST',
+                dataType: 'json',
+                data: trans_json,
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                beforeSend: function () {
+                    $('.wrap-loading').removeClass('display-none');
+                },
+                complete: function () {
+                    $('.wrap-loading').addClass('display-none');
+                },
+                success: function (retVal) {
+                    alert('name: ' + retVal.name + ' / cnt: ' + retVal.cnt);
+                    console.log(retVal)
+                },
+                error: function (retVal, status, er) {
+                    alert("error: " + retVal + " status: " + status + " er:" + er);
+                }
+            });
+
+        }
+    </script> -->
+
+    <input type="button" value="autograde" onclick="autograde()" />
+    <div id="disp"></div>
+    <script type="text/javascript" language="javascript">
+        // 버튼 autograde
+        function autograde() {
+            // var PythonShell = require('python-shell');
+
+            // PythonShell.run('/python-autograder/arithmetic_function_test.py', function (err) {
+            //     if (err) throw err;
+            //     console.log('finished');
+            //     console.log("Now read data");
+            // });
+
+            // $('#disp').load('/python-autograder/arithmetic_function_test.py');
+            
+            var object;
+            $.ajax({
+                url: "/python-autograder/arithmetic_function.py",
+                async: false,
+                success: function (retVal) {
+                    object=retVal
+                },
+                error: function (retVal, status, er) {
+                    alert("error: " + retVal + " status: " + status + " er:" + er);
+                }
+            });
+            $.ajax({
+                url: "https://lezle043k7.execute-api.ap-northeast-2.amazonaws.com/2020-01-04/lambda",
+                type: 'POST',
+                dataType: 'text',
+                data: object,
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                beforeSend: function () {
+                    $('.wrap-loading').removeClass('display-none');
+                },
+                complete: function () {
+                    $('.wrap-loading').addClass('display-none');
+                },
+                success: function (retVal) {
+                    console.log(object)
+                    alert('created: ' + retVal.created + ' / tests: ' + retVal.tests);
+                    console.log(retVal)
+                },
+                error: function (retVal, status, er) {
+                    alert("error: " + retVal + " status: " + status + " er:" + er);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
