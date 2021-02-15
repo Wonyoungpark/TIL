@@ -8,7 +8,7 @@ import javax.swing.event.*;
 
 public class GUICalculator extends JFrame {
 	
-	//	전역 변수 선언
+	// 전역 변수 선언
 	static JLabel operate;
 	static JLabel info;
 	static int check_pos = 0;
@@ -16,7 +16,7 @@ public class GUICalculator extends JFrame {
 	
 	public GUICalculator () {
 		setTitle("계산기");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 종
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 종료
 		
 		// 배치 설정
 		Container c = getContentPane();
