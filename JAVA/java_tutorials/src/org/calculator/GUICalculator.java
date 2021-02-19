@@ -15,8 +15,8 @@ public class GUICalculator extends JFrame {
 	static int check_range = 0;
 	
 	public GUICalculator () {
-		setTitle("계산기");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 종료
+		setTitle("Calculator");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// 배치 설정
 		Container c = getContentPane();
@@ -149,7 +149,7 @@ public class GUICalculator extends JFrame {
 							else if (n > 0 && n <= 10) {
 								operate.setFont(new Font("맑은 고딕", 0, 40));
 								operate.setText(operate.getText().substring(0, n));
-								info.setText("수식을 지우는 중입니다 ");					
+								info.setText("수식을 지우는 중입니다 ");
 							}						
 							else {
 								operate.setFont(new Font("맑은 고딕", 0, 35));
