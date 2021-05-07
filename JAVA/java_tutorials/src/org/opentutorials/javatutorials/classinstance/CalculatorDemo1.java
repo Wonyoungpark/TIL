@@ -4,10 +4,14 @@ class Calculatorr {
 	static double PI = 3.14; // 클래스 전체에서 사용 가능
 	int left, right;
 	
-	public void setOprands(int left, int right) {
-		this.left = left;
+	public void setOprands(int left, int right) { // left와 right는 지역변수
+		this.left = left; // 전역변수에 지역변수 할당
 		this.right = right;
 	}
+//	public void setOprands(int _left, int _right) {
+//		left = _left;
+//		right = _right;
+//	}
 	
 	public void sum() {
 		System.out.println(this.left + this.right);
