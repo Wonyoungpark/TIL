@@ -1,0 +1,7 @@
+class item {
+	
+}
+
+class ClasspathDemo {
+
+}
