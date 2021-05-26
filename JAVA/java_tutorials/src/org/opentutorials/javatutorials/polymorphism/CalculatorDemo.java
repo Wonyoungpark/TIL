@@ -20,6 +20,24 @@ abstract class Calculator{
 	}
 }
 
+class CalculatorDecoPlus extends Calculator{
+	public void sum() {
+		System.out.println("+ sum : "+_sum());
+	}
+	public void avg() {
+		System.out.println("+ avg : "+(this.left+this.right)/2);
+	}
+}
+
+class CalculatorDecoMinus extends Calculator{
+	public void sum() {
+		System.out.println("- sum : "+_sum());
+	}
+	public void avg() {
+		System.out.println("- avg : "+(this.left+this.right)/2);
+	}
+}
+
 public class CalculatorDemo {
 	public static void execute(Calculator cal) {
 		System.out.println("실행결과");
@@ -31,9 +49,10 @@ public class CalculatorDemo {
 		c1.setOprands(10,20);
 //		c1.run();
 		
-		Calculator c2 = new CalculatorDecoMinums();
+		Calculator c2 = new CalculatorDecoMinus();
 		c2.setOprands(10, 20);
 //		c2.run();
+		
 		execute(c1);
 		execute(c2);
 	}
