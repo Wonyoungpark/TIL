@@ -31,3 +31,8 @@
 |protected|O|O|O|X|
 |default|O|O|X|X|
 |private|O|X|X|X|
+
+---
+### 예외
+- Checked Exception : 
+- UnChecked Exception : 예외 
