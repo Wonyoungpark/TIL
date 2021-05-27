@@ -34,5 +34,5 @@
 
 ---
 ### 예외
-- Checked Exception : 
-- UnChecked Exception : 예외 
+- Checked Exception : 예외 상황 복구 가능 ex) 파일 불러오기 오류
+- UnChecked Exception : 예외 상황 복구 불가능 ex) 산술 문제
