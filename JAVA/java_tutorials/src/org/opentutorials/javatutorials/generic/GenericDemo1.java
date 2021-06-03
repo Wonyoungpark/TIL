@@ -18,9 +18,9 @@ class EmployeeInfo{
 //}
 
 
-class Person{
+class Person1{
 	public Object info;
-	Person(Object info){ this.info = info; }
+	Person1(Object info){ this.info = info; }
 }
 
 public class GenericDemo1 {
@@ -34,7 +34,7 @@ public class GenericDemo1 {
 //		EmployeePerson ep = new EmployeePerson(ei);
 //		System.out.println(ep.info.rank);
 		
-		Person p1 = new Person("부장"	);
+		Person1 p1 = new Person1("부장"	);
 		EmployeeInfo ei = (EmployeeInfo)p1.info;
 		System.out.println(ei.rank);
 		
