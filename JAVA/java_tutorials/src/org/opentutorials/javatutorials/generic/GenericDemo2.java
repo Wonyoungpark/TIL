@@ -37,7 +37,7 @@ public class GenericDemo2 {
 //		Person2 p2 = new Person2(e, i);
 //		p2.printInfo(e);
 		Person2 p2 = new Person2(new EmployeeInfo2(1));
-		Person2<String> p3 = new Person2<String>("부장");
+//		Person2<String> p3 = new Person2<String>("부장");
 	}
 
 }
