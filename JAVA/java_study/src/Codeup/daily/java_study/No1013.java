@@ -1,14 +1,15 @@
-package daily.codeup.java_study;
+package Codeup.daily.java_study;
 
 import java.util.Scanner;
 
-public class No1017 {
+public class No1013 {
 
 	public static void main(String[] args) {
-		int a;
+		int a,b;
         Scanner sc = new Scanner(System.in);
         a = sc.nextInt();
-        System.out.format("%d %d %d",a,a,a);
+        b = sc.nextInt();
+        System.out.format("%d %d",a,b);
 	}
 
 }

@@ -1,4 +1,4 @@
-package daily.codeup.java_study;
+package Codeup.daily.java_study;
 
 public class No1006 {
 	public static void main(String[] args){

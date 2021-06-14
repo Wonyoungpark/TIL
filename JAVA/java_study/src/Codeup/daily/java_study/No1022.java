@@ -1,4 +1,4 @@
-package daily.codeup.java_study;
+package Codeup.daily.java_study;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
