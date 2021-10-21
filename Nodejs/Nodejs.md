@@ -69,4 +69,4 @@ app.get('/hello/:nameParam', function(req,res){ // 3
 2. query 통해 name 받음. `req.query`에 저장
 3. route parameter 통해 name 받음. `req.params`에 저장
 
-- ejs는 변수 출력시 `<%= 변수명 %>`
+- ejs는 변수 출력시 `<%= 변수명 %>` 사용
