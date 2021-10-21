@@ -48,3 +48,25 @@ app.use(express.static(__dirname + '/public'));
 ```
 - `app.use()`: `app.get()`과 다르게 서버에 요청이 올때마다 무주건 콜백
 - `app.use(express.static(__dirname + '/public'))` : '현재_위치/public' route를 static폴더로 지정
+
+EJS
+===
+Embedded JavaScript, Express에서 Dynamci website 만들기 위해 템플릿으로 사용되는 파일
+- ejs파일에서는 `res.render()` 사용
+```javascript
+app.set('view engine','ejs'); // 1
+app.use(express.static(__dirname + '/public'));
+
+app.get('/hello', function(req,res){ // 2
+  res.render('hello', {name:req.query.nameQuery});
+});
+
+app.get('/hello/:nameParam', function(req,res){ // 3
+  res.render('hello', {name:req.params.nameParam});
+});
+```
+1. ejs를 사용하기 위한 코드
+2. query 통해 name 받음. `req.query`에 저장
+3. route parameter 통해 name 받음. `req.params`에 저장
+
+- ejs는 변수 출력시 `<%= 변수명 %>`
