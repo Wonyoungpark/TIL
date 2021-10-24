@@ -21,6 +21,11 @@ Node Package Manager, node.js의 라이브러리
 - `npm init` : node 프로젝트 생성 -> package.json 생성
 - `npm install --save [package 이름]` : node_modules에 해당 패키지 다운로드
 
+서버 실행 방법
+------------
+1. `node index.js` (package.json에서 main에 해당하는 파일명)
+2. `nodemon` : 서버 코드 변경시 자동으로 서버 재시작
+ 
 Express 서버 생성
 ---------------
 ```javascript
@@ -50,8 +55,8 @@ app.use(express.static(__dirname + '/public'));
 - `app.use(express.static(__dirname + '/public'))` : '현재_위치/public' route를 static폴더로 지정
 
 EJS
-===
-Embedded JavaScript, Express에서 Dynamci website 만들기 위해 템플릿으로 사용되는 파일
+---
+Embedded JavaScript, Express에서 Dynamci website 만들기 위해 템플릿으로 사용되는 파일 (.ejs)
 - ejs파일에서는 `res.render()` 사용
 ```javascript
 app.set('view engine','ejs'); // 1
@@ -70,3 +75,23 @@ app.get('/hello/:nameParam', function(req,res){ // 3
 3. route parameter 통해 name 받음. `req.params`에 저장
 
 - ejs는 변수 출력시 `<%= 변수명 %>` 사용
+
+mongoDB
+--------
+```javascript
+mongoose.connect(process.env.MONGO_DB); // 1
+var db = mongoose.connection; //2
+db.once('open', function(){ //3, DB 연결 성공
+  console.log('DB connected');
+});
+db.on('error', function(err){ //4, DB 연결 실패
+  console.log('DB ERROR : ', err);
+});
+```
+1. `mongoose.connect()`: DB연결
+   `process.env.환경변수명` : process.env는 환경변수 갖는 객체
+2. mongoose의 DB 객체를 변수화
+3. `db.once('once')`: db는 딱 1번 연결
+4. `db.on('error')`: 에러는 다양한 경우에 발생 가능
+
+mongodb 설치 방법 :[참고](https://calvinjmkim.tistory.com/33)
