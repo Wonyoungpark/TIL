@@ -93,3 +93,149 @@ db.on('error', function(err){ //4, DB 연결 실패
 2. mongoose의 DB 객체를 변수화
 3. `db.once('once')`: db는 딱 1번 연결
 4. `db.on('error')`: 에러는 다양한 경우에 발생 가능
+
+데이터 생성 및 전달 (C,R)
+---------------
+* `body-parser` : 웹브라우저의 form으로 전송된 data를 서버에서 사용하기 위한 패키지
+
+```javascript
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // 1
+app.use(bodyParser.urlencoded({extended:true})); // 2
+// DB schema // 3
+var contactSchema = mongoose.Schema({
+  name:{type:String, required:true, unique:true},
+  email:{type:String},
+  phone:{type:String}
+})
+var Contact = mongoose.model('contact', contactSchema); // 4
+// Home // 5
+app.get('/', function(req, res){
+  res.redirect('/contacts');
+});
+// Contacts - Index // 6
+app.get('/contacts', function(req, res){
+  Contact.find({}, function(err, contacts){
+    if(err) return res.json(err);
+    res.render('contacts/index', {contacts:contacts});
+  });
+});
+// Contacts - New
+app.get('/contacts/new', function(req, res){
+  res.render('contacts/new');
+});
+// Contacts - create // 7
+app.post('/contacts', function(req, res){
+  Contact.create(req.body, function(err, contact){
+    if(err) return res.json(err);
+    res.redirect('/contacts');
+  });
+});
+```
+1. json 형식의 데이터를 받음. `req.body()`에서 form으로 입력받은 데이터를 사용.
+2. urlencoded data를 extended 알고리즘으로 분석.
+3. DB에 사용할 schema 설정. contact 형태의 데이터를 저장.
+4. 설정한 schema의 model 생성. `'contact'`는 mongodb에서 사용하는 collection명
+5. route 설정. "/"에 GET 요청이 올 경우, "/contacts"로 redirect.
+6. "/contacts"에 GET 요청이 올 경우, 에러가 있다면 json으로 출력하고 없다면, render(페이지 동적으로 제작)함.
+  * `모델.find(검색조건, 콜백_함수)`
+    - `모델.find()` : DB에서 검색조건에 맞는 model data 찾고 콜백_함수 호출.
+    - `검색조건` : Object 형태로 전달.
+    - `콜백_함수` : `function(에러, 검색결과)` 형태. 에러가 있는 경우 결과 전달.
+7. "/contacts"에 POST 요청이 올 경우.
+  - `모델.create()` : DB에 data 생성. 첫번째 파라미터로부터 data object 생성.
+
+HTML
+-----
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %> <!-- 1 -->
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="contact contact-index">
+      <h2>Index</h2>
+      <ul>
+        <% contacts.forEach(function(contact) { %> <!-- 2 -->
+          <li>
+            <%= contact.name %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </body>
+</html>
+```
+1. `<%- include() %>` : 외부 ejs 적용
+2. `forEach()` : 반복 출력
+
+데이터 수정 및 삭제 (U,D)
+---------------
+* `method-override` : query로 method 값을 받아서 request의 HTTP method로 변환하는 패키지
+
+```javascript
+var methodOverride = require('method-override');
+app.use(methodOverride('_method')); // 1
+// Contacts - show // 2
+app.get('/contacts/:id', function(req, res){
+  Contact.findOne({_id:req.params.id}, function(err, contact){
+    if(err) return res.json(err);
+    res.render('contacts/show', {contact:contact});
+  });
+});
+// Contacts - edit
+app.get('/contacts/:id/edit', function(req, res){
+  Contact.findOne({_id:req.params.id}, function(err, contact){
+    if(err) return res.json(err);
+    res.render('contacts/edit', {contact:contact});
+  });
+});
+// Contacts - update // 3
+app.put('/contacts/:id', function(req, res){
+  Contact.findOneAndUpdate({_id:req.params.id}, req.body, function(err, contact){
+    if(err) return res.json(err);
+    res.redirect('/contacts/'+req.params.id);
+  });
+});
+// Contacts - destroy // 4
+app.delete('/contacts/:id', function(req, res){
+  Contact.deleteOne({_id:req.params.id}, function(err){
+    if(err) return res.json(err);
+    res.redirect('/contacts');
+  });
+});
+```
+1. `_method`의 query로 들어오는 값으로 HTTP method 변환.
+2. '/contacts/:id'에 GET 요청이 올 경우, 해당 값을 `req.params`에 넣음.
+  - `모델.findOne()` : 조건에 맞는 결과 한개 찾기.
+3. '/contacts/:id'에 PUT 요청이 올 경우.
+  - `모델.findOneAndUpdate(조건, update할 정보, 콜백_함수)` : DB에서 해당 model의 document 한개 찾아 수정하는 함수. 콜백_함수에는 수정 전의 값이 넘겨짐(수정 후 값을 받고 싶다면, `{new:true}` 사용)
+4. '/contacts/:id'에 DELETE 요청이 올 경우.
+  - `모델.deleteOne()` : DB에서 해당 model의 document 한개 삭제
+
+HTML
+----
+```html
+<ul>
+  <% contacts.forEach(function(contact) { %>
+    <li>
+      <a href="/contacts/<%= contact._id %>"><%= contact.name %></a>
+    </li>
+  <% }) %>
+</ul>
+```
+이름에 `<a>` 태그 추가하여 show action과 연결
+
+```html
+<div class="contact-menu">
+  <a href="/contacts/<%= contact._id %>/edit">Edit</a> <!-- 1 -->
+  <form action="/contacts/<%= contact._id %>?_method=delete" method="post"> <!-- 2 -->
+    <a href="#" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;">Delete</a>
+  </form>
+</div>
+```
+1. `<a>` 태그로 edit action과 연결
+2. `<a>` 태그로는 GET만 요청 가능 -> `<form>`도 POST만 가능해 `method=`로 DELETE 요청.
