@@ -1,3 +1,8 @@
+Learning List
+=============
+- [A MEAN Blog](https://www.a-mean-blog.com/ko/blog/MEAN-Stack)
+<br>
+
 MEAN Stack
 ===========
 - Mongo DB
