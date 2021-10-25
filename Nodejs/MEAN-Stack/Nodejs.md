@@ -93,5 +93,3 @@ db.on('error', function(err){ //4, DB 연결 실패
 2. mongoose의 DB 객체를 변수화
 3. `db.once('once')`: db는 딱 1번 연결
 4. `db.on('error')`: 에러는 다양한 경우에 발생 가능
-
-mongodb 설치 방법 :[참고](https://calvinjmkim.tistory.com/33)
