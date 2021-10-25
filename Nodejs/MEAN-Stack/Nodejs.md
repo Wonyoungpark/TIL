@@ -52,7 +52,7 @@ Static 폴더 생성
 app.use(express.static(__dirname + '/public'));
 ```
 - `app.use()`: `app.get()`과 다르게 서버에 요청이 올때마다 무주건 콜백
-- `app.use(express.static(__dirname + '/public'))` : '현재_위치/public' route를 static폴더로 지정
+- `app.use(express.static(__dirname + '/public'))` : '현재s위치/public' route를 static폴더로 지정
 
 EJS
 ---

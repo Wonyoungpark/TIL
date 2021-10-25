@@ -6,13 +6,13 @@ Learning List
 
 Mongo DB
 =========
-대표적인 NoSQL(Non Relational Database)
-table, 행, 열의 개념이 없음.
+대표적인 NoSQL(Non Relational Database)<br>
+table, 행, 열의 개념이 없음.<br>
 - document :  하나의 데이터
 - collection : document의 모음
-document들은 JSON 형식으로 저장.
-데이터의 추가/삭제가 자유로움.
-DB의 조작은 JavaScript로 함.
+document들은 JSON 형식으로 저장.<br>
+데이터의 추가/삭제가 자유로움.<br>
+DB의 조작은 JavaScript로 함.<br>
 
 mongodb 설치
 -----------
