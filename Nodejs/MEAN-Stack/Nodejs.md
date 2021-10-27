@@ -51,7 +51,8 @@ Static 폴더 생성
 ```javascript
 app.use(express.static(__dirname + '/public'));
 ```
-- `app.use()`: `app.get()`과 다르게 서버에 요청이 올때마다 무주건 콜백
+- `app.use()`: `app.get()`과 다르게 서버에 요청이 올때마다 무조건 콜백
+- `app.use('route',콜백_함수)`: 해당 route에 요청이 오는 경우만 콜백_함수 호출
 - `app.use(express.static(__dirname + '/public'))` : '현재s위치/public' route를 static폴더로 지정
 
 EJS
@@ -239,3 +240,22 @@ HTML
 ```
 1. `<a>` 태그로 edit action과 연결
 2. `<a>` 태그로는 GET만 요청 가능 -> `<form>`도 POST만 가능해 `method=`로 DELETE 요청.
+
+Module
+------
+my-module 파일 : `module.exports = myModule;`
+모듈을 다른 파일에서 사용할 수 있도록 담아줌.<br>
+다른 파일 : `var my_module = require("./my-module");`
+
+```javascript
+var express = require('express');
+var router = express.Router(); // 1
+
+router.get('/', function(req, res){
+  res.redirect('/contacts');
+});
+
+module.exports = router; // 2
+```
+1. `express.Router()`: router 함수 초기화
+2. `module.exports`로 module이 되어 require하면 사용
