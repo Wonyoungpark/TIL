@@ -259,3 +259,12 @@ module.exports = router; // 2
 ```
 1. `express.Router()`: router 함수 초기화
 2. `module.exports`로 module이 되어 require하면 사용
+
+```javascript
+Module.find({})
+  .sort('-createdAt')
+  .exec(function(err,posts){})
+```
+- Module Schema를 createdAt 항목 기준으로 내림차순 정렬
+- exec()에서 받아온 data로 할 일 정의
+
