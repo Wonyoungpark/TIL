@@ -268,3 +268,47 @@ Module.find({})
 - Module Schema를 createdAt 항목 기준으로 내림차순 정렬
 - exec()에서 받아온 data로 할 일 정의
 
+데이터 보안
+---------
+* bcryptjs
+설치 : `npm install --save bcryptjs`
+
+```javascript
+var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
+
+...
+
+  // update user
+  if(!user.isNew){
+    if(!user.currentPassword){
+      user.invalidate('currentPassword', 'Current Password is required!');
+    }
+    else if(!bcrypt.compareSync(user.currentPassword, user.originalPassword)){ // 1
+      user.invalidate('currentPassword', 'Current Password is invalid!');
+    }
+
+    ...
+
+// hash password // 2
+userSchema.pre('save', function (next){
+  var user = this;
+  if(!user.isModified('password')){
+    return next();
+  }
+  else {
+    user.password = bcrypt.hashSync(user.password); // 입력값 hash로 변환
+    return next();
+  }
+});
+
+// model methods // 3
+userSchema.methods.authenticate = function (password) {
+  var user = this;
+  return bcrypt.compareSync(password,user.password);
+};
+```
+1. bcrypt의 compareSync로 저장된 해시값과 paswword의 hash 일치하는지 확인<br>
+text값을 hash로 변환해 비교
+2. `userSchema.pre` : event 발생 전 callback() 실행
+3. 로그인시 사용되는 password hash 비교 method
