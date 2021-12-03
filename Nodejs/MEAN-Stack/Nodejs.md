@@ -320,14 +320,21 @@ Flash
 `npm install --save express-session connect-flash`
 
 - `regrex` : 정규 표현식, 특정한 형식의 값만 저장하도록 제한
-```javascript
-var userSchema = mongoose.Schema({
-  username:{
-    type:String,
-    required:[true,'Username is required!'],
-    match:[/^.{4,12}$/,'Should be 4-12 characters!'],
-    trim:true,
-    unique:true
+  ```javascript
+  var userSchema = mongoose.Schema({
+    username:{
+      type:String,
+      required:[true,'Username is required!'],
+      match:[/^.{4,12}$/,'Should be 4-12 characters!'],
+      trim:true,
+      unique:true
+    }
   }
-}
-```
+  ```
+  - `trim`: 문자열 앞뒤 빈칸 제거
+  - `match`: `regrex`에 부합하지 않으면 에러 출력<br>
+    |`/ /` : regrex는 이 안에 작성
+    |`^` : 문자열의 시작 위치
+    |`.` : 문자열 아무거나
+    |`{숫자1,숫자2}` : 숫자1<= 길이 <=숫자2
+    |`$` : 문자열의 끝 위치
