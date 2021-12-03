@@ -338,3 +338,68 @@ Flash
     > `.` : 문자열 아무거나<br>
     > `{숫자1,숫자2}` : 숫자1<= 길이 <=숫자2<br>
     > `$` : 문자열의 끝 위치<br>
+    => 전체 길이가 4이상 12이하의 문자열
+
+```javascript
+var methodOverride = require('method-override');
+var flash = require('connect-flash');
+var session = require('express-session');
+var app = express();
+
+...
+
+app.use(methodOverride('_method'));
+app.use(flash()); //1
+app.use(sesiion({secrete:'MySecrete', resave:true, saveUninitalized:true})); //2
+```
+1. flash 초기화 => `req.flash(문자열,저장값)` 함수 사용 가능
+2. `session()` : 서버에서 접속자를 구분시킴<br>
+    `secrete` : session을 hash화할 때 사용
+
+<br/>
+
+```javascript
+// New
+router.get('/new', funciton(req,res){
+  var user = req.fresh('user')[0] || {};
+  var errors = req.fresh('errors')[0] || {};
+  res.render('users/new', {user:user, errors:errors});
+});
+```
+user 생성시 에러가 발생하면 new 페이지에 에러와 기존에 입력한 값(create route에서 생성된 flash)를 출력.<br/>
+값이 없다면 빈 오브젝트 출력 : `|| {}`
+
+```javascript
+// create
+router.post('/',funciton(req,res){
+  User.create(req.body, funciton(err,user){
+    if(err){
+      req.flash('user',req.body);
+      req.flash('errors',parseError(err));
+      return res.redirect('/users/new');
+    }
+    res.redirect('/users');
+  });
+});
+```
+user 생성시 오류가 있다면 user & error flash 만들고 new 페이지로 redirect.
+
+```javascript
+// edit
+router.get('/:username/edit', function(req,res){
+  var user = req.flash('user')[0];
+  var errors = req.flash('errors')[0] || {};
+  if(!user){
+    User.findOne({username:req.params.username}, function(err,user){
+      if(err) return res.json(err);
+      res.render('user/edit',{ userame:req.params.username, user:user, errors:errors });
+    });
+  }
+  else {
+    res.render('users/edit', {uername:req.params.user, errrors:errors});
+  }
+});
+```
+update에서 오류가 발생하는 경우, 기존에 입력한 값으로 form에 값 생성.<br/>
+=> `user`에 `|| {}` 사용 안함.<br/>
+render할 때 username을 따로 보내줌.
