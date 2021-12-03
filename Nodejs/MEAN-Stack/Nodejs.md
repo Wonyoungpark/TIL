@@ -312,3 +312,22 @@ userSchema.methods.authenticate = function (password) {
 text값을 hash로 변환해 비교
 2. `userSchema.pre` : event 발생 전 callback() 실행
 3. 로그인시 사용되는 password hash 비교 method
+
+Flash
+------
+이름&값을 저장할 수 있음.<br>
+한번 생성되면 사용 전까지 서버 메모리상에 저장 -> 사용되면 사라지는 data<br>
+`npm install --save express-session connect-flash`
+
+- `regrex` : 정규 표현식, 특정한 형식의 값만 저장하도록 제한
+```javascript
+var userSchema = mongoose.Schema({
+  username:{
+    type:String,
+    required:[true,'Username is required!'],
+    match:[/^.{4,12}$/,'Should be 4-12 characters!'],
+    trim:true,
+    unique:true
+  }
+}
+```
