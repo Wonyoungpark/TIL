@@ -403,3 +403,67 @@ router.get('/:username/edit', function(req,res){
 update에서 오류가 발생하는 경우, 기존에 입력한 값으로 form에 값 생성.<br/>
 => `user`에 `|| {}` 사용 안함.<br/>
 render할 때 username을 따로 보내줌.
+
+Login
+------
+`npm install --save passport passport-local`
+passport : user authentication(사용자 인증) 위한 package
+
+```javascript
+// index.js
+var passport = require('./config/passport'); 
+...
+app.use(passport.initialize()); //passport 초기화
+app.use(passport.session()); //passport를 세션과 연결
+app.use(function(req,res,next){
+  res.locals.isAuthenticated = req.isAuthenticated(); // 현재 로그인 유무
+  res.locals.currentUser = req.user;
+  next(); // user 정보
+});
+```
+- `app.use()`에 함수를 넣은 것 -> middleware<br>
+  request 올 때마다 무조건 실행
+- `user.locals`에 담긴 변수 -> ejs에서 바로 사용 가능
+
+```javascript
+// config/passport.js
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var User = require('../models/User');
+
+passport.serializeUser(function(user,done){
+  done(null,user.id);
+}); // 로그인시 user를 id만 세션에 저장
+passport.deserializeUser(function(id,done){
+  User.findOne({_id:id},funciton(err,user){
+    done(err,user);
+  });
+}); // request마다 db에서 user 정보 읽어옴.
+
+// localstrategy 설정
+passport.use('local-login',
+  new LocalStrategy({
+    usernameField : 'username',
+    passwordField : 'password',
+    passReqToCallback : true
+  },
+  function(req,username,password,done){ //로그인시 호출
+    User.findOne({username:username})
+      .select({password:1})
+      .exec(funciton(err,user){
+        if (err) return done(err);
+
+        // password hash 비교
+        if(user&&user.authenticate(password)){
+          return done(null,user);
+        }
+        else{
+          req.flash('username',username);
+          req.flash('errors',{login:'Theusername or password is incorrect.'});
+          return done(null,false);
+        }
+      });
+  }));
+  
+module.exports = passport;
+```
