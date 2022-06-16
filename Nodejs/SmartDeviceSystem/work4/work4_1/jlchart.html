@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        window.onload = function () {
+            var socket = io.connect(); // 소켓생성
+            var widthcount = 1;
+
+            socket.on('watch', function (xdata, ydata, zdata) { // 조이스틱 실시간 수신
+                Plotly.extendTraces('chart', { y: [[xdata], [ydata]] }, [0, 1]);
+                widthcount++; // 그래프 데이터 카운트
+                if (widthcount > 100) { // 100이상일 경우 차트 동적 이동
+                    Plotly.relayout('chart', {
+                        xaxis: {
+                            range: [widthcount - 99, widthcount]
+                        }
+                    });
+                }
+            });
+            socket.on('lwatch', function (zdata) { // 조이스틱 실시간 수신
+                Plotly.extendTraces('chart', { y: [[zdata]] }, [2]);
+                widthcount++; // 그래프 데이터 카운트
+                if (widthcount > 100) { // 100이상일 경우 차트 동적 이동
+                    Plotly.relayout('chart', {
+                        xaxis: {
+                            range: [widthcount - 99, widthcount]
+                        }
+                    });
+                }
+            });
+            // 문서 객체 이벤트 연결
+            document.getElementById('start').onclick = function () {
+                var text = document.getElementById('text').value;
+                socket.emit('startmsg', text);
+            };
+            document.getElementById('stop').onclick = function () {
+                var text = document.getElementById('text').value;
+                socket.emit('stopmsg', text);
+            };
+
+            // 조도 센서
+            document.getElementById('lstart').onclick = function () {
+                var ltext = document.getElementById('ltext').value;
+                console.log(ltext);
+                socket.emit('startlight', ltext);
+            };
+            document.getElementById('lstop').onclick = function () {
+                var ltext = document.getElementById('ltext').value;
+                socket.emit('stoplight', ltext);
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <h2> 조이스틱, 조도 측정 </h2>
+    <hr>
+    <input type="text" id="text" value="800" />ms (예, 500~1000ms)
+    <input type="button" id="start" value="조이스틱 센서 측정 가동" />
+    <input type="button" id="stop" value="조이스틱 센서 측정 중지" />
+    <br>
+    <input type="text" id="ltext" value="2200" /> (예, 2200)
+    <input type="button" id="lstart" value="조도 센서 측정 가동" />
+    <input type="button" id="lstop" value="조도 센서 측정 중지" />
+    <hr>
+    <div id="chart">
+        <script>
+            var joyx = { y: [0], name: 'JoyX', type: 'line', marker: { color: "rgb(255,0,0)" }, line: { shape: 'spline' } };
+            var joyy = { y: [0], name: 'JoyY', type: 'line', marker: { color: "rgb(0,0,255)" }, line: { shape: 'spline' } };
+            var light = { y: [0], name: 'Light', type: 'line', marker: { color: "rgb(0,255,0)" }, line: { shape: 'spline' } };
+            var data = [joyx, joyy, light];
+            Plotly.plot('chart', data);
+            </script>
+    </div>
+</body>
+
+</html>
