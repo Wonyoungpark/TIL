@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_excel" compatibility="9.10.008" expanded="true" height="68" name="Read Excel" width="90" x="112" y="34">
+        <parameter key="excel_file" value="/Users/holly/Desktop/데이터마이닝/실습/12주차/09_Text_9.3.2_blog-gender-dataset.xlsx"/>
+        <parameter key="sheet_selection" value="sheet number"/>
+        <parameter key="sheet_number" value="1"/>
+        <parameter key="imported_cell_range" value="A1:B3232"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="date_format" value=""/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="BLOG.true.text.attribute"/>
+          <parameter key="1" value="GENDER.true.binominal.label"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples" width="90" x="112" y="136">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="no_missing_labels"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list"/>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="split_data" compatibility="9.10.008" expanded="true" height="103" name="Split Data" width="90" x="179" y="289">
+        <enumeration key="partitions">
+          <parameter key="ratio" value="0.5"/>
+          <parameter key="ratio" value="0.5"/>
+        </enumeration>
+        <parameter key="sampling_type" value="linear sampling"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="514" y="238">
+        <parameter key="excel_file" value="testing-sample.xls"/>
+        <parameter key="file_format" value="xls"/>
+        <enumeration key="sheet_names"/>
+        <parameter key="sheet_name" value="RapidMiner Data"/>
+        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+        <parameter key="number_format" value="#.0"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <operator activated="true" class="text:process_document_from_data" compatibility="9.4.000" expanded="true" height="82" name="Process Documents from Data" width="90" x="313" y="34">
+        <parameter key="create_word_vector" value="true"/>
+        <parameter key="vector_creation" value="TF-IDF"/>
+        <parameter key="add_meta_information" value="true"/>
+        <parameter key="keep_text" value="false"/>
+        <parameter key="prune_method" value="absolute"/>
+        <parameter key="prune_below_percent" value="3.0"/>
+        <parameter key="prune_above_percent" value="30.0"/>
+        <parameter key="prune_below_absolute" value="20"/>
+        <parameter key="prune_above_absolute" value="200"/>
+        <parameter key="prune_below_rank" value="0.05"/>
+        <parameter key="prune_above_rank" value="0.95"/>
+        <parameter key="datamanagement" value="double_sparse_array"/>
+        <parameter key="data_management" value="auto"/>
+        <parameter key="select_attributes_and_weights" value="false"/>
+        <list key="specify_weights"/>
+        <process expanded="true">
+          <operator activated="true" class="text:tokenize" compatibility="9.4.000" expanded="true" height="68" name="Tokenize" width="90" x="45" y="85">
+            <parameter key="mode" value="non letters"/>
+            <parameter key="characters" value=".:"/>
+            <parameter key="language" value="English"/>
+            <parameter key="max_token_length" value="3"/>
+          </operator>
+          <operator activated="true" class="text:filter_stopwords_english" compatibility="9.4.000" expanded="true" height="68" name="Filter Stopwords (English)" width="90" x="179" y="85"/>
+          <operator activated="true" class="text:stem_porter" compatibility="9.4.000" expanded="true" height="68" name="Stem (Porter)" width="90" x="246" y="187"/>
+          <operator activated="true" class="text:generate_n_grams_terms" compatibility="9.4.000" expanded="true" height="68" name="Generate n-Grams (Terms)" width="90" x="313" y="289">
+            <parameter key="max_length" value="2"/>
+          </operator>
+          <operator activated="true" class="text:filter_by_length" compatibility="9.4.000" expanded="true" height="68" name="Filter Tokens (by Length)" width="90" x="435" y="187">
+            <parameter key="min_chars" value="4"/>
+            <parameter key="max_chars" value="25"/>
+          </operator>
+          <connect from_port="document" to_op="Tokenize" to_port="document"/>
+          <connect from_op="Tokenize" from_port="document" to_op="Filter Stopwords (English)" to_port="document"/>
+          <connect from_op="Filter Stopwords (English)" from_port="document" to_op="Stem (Porter)" to_port="document"/>
+          <connect from_op="Stem (Porter)" from_port="document" to_op="Generate n-Grams (Terms)" to_port="document"/>
+          <connect from_op="Generate n-Grams (Terms)" from_port="document" to_op="Filter Tokens (by Length)" to_port="document"/>
+          <connect from_op="Filter Tokens (by Length)" from_port="document" to_port="document 1"/>
+          <portSpacing port="source_document" spacing="0"/>
+          <portSpacing port="sink_document 1" spacing="0"/>
+          <portSpacing port="sink_document 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (2)" width="90" x="514" y="136">
+        <parameter key="repository_entry" value="blog-gender-class-wordlist"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="514" y="34">
+        <parameter key="repository_entry" value="blog-gender-class-training-docvector"/>
+      </operator>
+      <connect from_op="Read Excel" from_port="output" to_op="Filter Examples" to_port="example set input"/>
+      <connect from_op="Filter Examples" from_port="example set output" to_op="Split Data" to_port="example set"/>
+      <connect from_op="Split Data" from_port="partition 1" to_op="Process Documents from Data" to_port="example set"/>
+      <connect from_op="Split Data" from_port="partition 2" to_op="Write Excel" to_port="input"/>
+      <connect from_op="Process Documents from Data" from_port="example set" to_op="Store" to_port="input"/>
+      <connect from_op="Process Documents from Data" from_port="word list" to_op="Store (2)" to_port="input"/>
+      <connect from_op="Store (2)" from_port="through" to_port="result 2"/>
+      <connect from_op="Store" from_port="through" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+    </process>
+  </operator>
+</process>

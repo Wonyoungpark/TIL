@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.9.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.4.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_excel" compatibility="6.0.003" expanded="true" height="68" name="Read Excel" width="90" x="45" y="30">
+        <parameter key="excel_file" value="C:/Users/abc/Documents/RapidMiner/Local Repository/12_Feature_12.2_cereals-PCA.xlsx"/>
+        <parameter key="sheet_selection" value="sheet number"/>
+        <parameter key="sheet_number" value="1"/>
+        <parameter key="imported_cell_range" value="A1:P78"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="date_format" value=""/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="name.false.polynominal.attribute"/>
+          <parameter key="1" value="mfr.false.polynominal.attribute"/>
+          <parameter key="2" value="type.false.binominal.attribute"/>
+          <parameter key="3" value="calories.true.integer.attribute"/>
+          <parameter key="4" value="protein.true.integer.attribute"/>
+          <parameter key="5" value="fat.true.integer.attribute"/>
+          <parameter key="6" value="sodium.true.integer.attribute"/>
+          <parameter key="7" value="fiber.true.numeric.attribute"/>
+          <parameter key="8" value="carbo.true.numeric.attribute"/>
+          <parameter key="9" value="sugars.true.integer.attribute"/>
+          <parameter key="10" value="potass.true.integer.attribute"/>
+          <parameter key="11" value="vitamins.true.integer.attribute"/>
+          <parameter key="12" value="shelf.true.integer.attribute"/>
+          <parameter key="13" value="weight.true.numeric.attribute"/>
+          <parameter key="14" value="cups.true.numeric.attribute"/>
+          <parameter key="15" value="rating.true.real.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="principal_component_analysis" compatibility="9.4.001" expanded="true" height="103" name="PCA" width="90" x="380" y="30">
+        <parameter key="dimensionality_reduction" value="keep variance"/>
+        <parameter key="variance_threshold" value="0.95"/>
+        <parameter key="number_of_components" value="1"/>
+      </operator>
+      <connect from_op="Read Excel" from_port="output" to_op="PCA" to_port="example set input"/>
+      <connect from_op="PCA" from_port="example set output" to_port="result 1"/>
+      <connect from_op="PCA" from_port="original" to_port="result 2"/>
+      <connect from_op="PCA" from_port="preprocessing model" to_port="result 3"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+    </process>
+  </operator>
+</process>
