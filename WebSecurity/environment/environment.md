@@ -35,7 +35,7 @@ Virtualbox를 실행시킨 후 '가상 시스템 가져오기' 선택<br><br>
 ## 실습용 가상 머신
 웹 모의해킹 실습용 가상 머신이다. 비박스를 기반으로 하는 가상머신으로 실습한다.<br>
 설치 : [실습용 가상 머신 설치 URL](https://github.com/bjpublic/whitehacker/)<br>
-![prac env](./img/env11.png)<br><br>
+![prac env](../img/env11.png)<br><br>
 
 ## 버프 스위트
 ### HTTP 프록시
