@@ -3,12 +3,14 @@
 ## Virtual Box
 가상화 프로그램을 통해 웹 모의해킹 실습<br>
 설치 : [VirtualBox homepage](https://www.virtualbox.org)<br>
+<hr>
 
 ## KALI Linux
 칼리 리눅스 가상 머신 이미지를 다운로드하여 설치한다.<br>
 설치 : [KALI homepage](https://www.kali.org/get-kali/#kali-virtual-machines)<br>
 ![kali env](../img/env1.png)<br>
 설치한 가상환경과 PC환경의 비트 버전에 따라 선택해 다운로드<br><br>
+<hr>
 
 ## 가상 시스템 환경 설정
 ![kali env](../img/env2.png)<br>
@@ -31,13 +33,35 @@ Virtualbox를 실행시킨 후 '가상 시스템 가져오기' 선택<br><br>
 ![kali net](../img/env9.png)<br>
 ![kali env](../img/env10.png)<br>
 파일을 수정하고 네트워크를 다시 검색하면 위 사진과 같이 eth1도 ip가 할당되었음을 확인할 수 있다.<br><br>
+<hr>
 
 ## 실습용 가상 머신
 웹 모의해킹 실습용 가상 머신이다. 비박스를 기반으로 하는 가상머신으로 실습한다.<br>
 설치 : [실습용 가상 머신 설치 URL](https://github.com/bjpublic/whitehacker/)<br>
 ![prac env](../img/env11.png)<br><br>
+<hr>
 
 ## 버프 스위트
 ### HTTP 프록시
 사용자와 웹 서버 가운데에 위치하여, 서로 간의 HTTP 요청과 응답을 중간에서 전달<br>
-전달 과정에서 메시지 조회/수정/삭제 가능
+전달 과정에서 메시지 조회/수정/삭제 가능<br>
+### 버프 스위트 기능
+- Target
+    * Site map : 접속한 모든 호스트 & URL 구조 파악
+    * Scope : 특정 대상과 관련된 내용만 표시할 수 있도록 범위 설정
+    * Spider : 자동 크롤링
+- Proxy
+    * Intercept : 웹 브라우저와 웹 서버가 주고받는 HTTP 요청 메시지와 응답 메시지의 내용을 변경
+    * HTTP history : 접속 기록
+    * Options
+- Intruder
+    * Target : 공격 대상 설정
+    * Positions : 공격 종류 선택
+    * Payloads : 테스트할 페이로드 세부 설정
+    * Options
+- Repeater : 메시지를 조작하여 반복적인 테스트 수행
+- Scanner : 웹 애플리케이션의 보안 취약점 찾기
+- Sequencer : 세션 값 추측
+- Decoder
+- Comparer : 두 개의 메시지 비교하여 차이점 찾기
+- Extender : 개발한 확장 기능 설치
