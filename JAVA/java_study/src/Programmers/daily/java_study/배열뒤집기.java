@@ -1,0 +1,24 @@
+package Programmers.daily.java_study;
+
+import java.util.Arrays;
+
+class Solution28 {
+    public int[] solution(int[] num_list) {
+        int[] answer = new int[num_list.length];
+        
+        for (int i = num_list.length-1;i>=0;i--){
+            System.out.println(num_list[i]);
+            answer[num_list.length-i-1] = num_list[i];
+        }
+        return answer;
+    }
+}
+
+public class 배열뒤집기 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
