@@ -1,7 +1,0 @@
-class item {
-	
-}
-
-class ClasspathDemo {
-
-}
