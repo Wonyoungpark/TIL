@@ -1,0 +1,7 @@
+def solution(numbers, direction):
+    answer = []
+    if direction=='left':
+        answer = numbers[1:]+[numbers[0]]
+    else:
+        answer = [numbers[-1]]+numbers[:-1]
+    return answer
