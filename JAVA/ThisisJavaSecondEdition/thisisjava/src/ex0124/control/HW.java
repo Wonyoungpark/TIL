@@ -1,6 +1,5 @@
 package ex0124.control;
 
-// 박원영
 public class HW {
 
 	public static void main(String[] args) {
