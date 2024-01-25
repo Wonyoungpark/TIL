@@ -130,3 +130,5 @@ dmypy.json
 
 # linux ova
 *.ova
+*.DS_Store
+.metadata
