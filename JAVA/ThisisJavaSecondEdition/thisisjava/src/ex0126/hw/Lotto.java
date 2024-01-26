@@ -11,8 +11,10 @@ public class Lotto {
 	}
 	
 	public static void sortDesc(int[] lotto, int n) {
-		for(int i=0;i<n;i++) {
-			
+		for(int i=0;i<lotto.length-1;i++) {
+			for(int j=0;j<lotto.length-1;j++) {
+				if(lotto[j]<lotto[j+1]) Sort.switchTwo(lotto,j+1,j);
+			}
 		}
 	}
 	
@@ -27,7 +29,7 @@ public class Lotto {
 			lotto[i]= (int)(Math.random()*45+1);
 		}
 		checkDis(lotto, n);
-		checkDis(lotto, n);
+		sortDesc(lotto, n);
 		printL(lotto, n);
 	}
 
