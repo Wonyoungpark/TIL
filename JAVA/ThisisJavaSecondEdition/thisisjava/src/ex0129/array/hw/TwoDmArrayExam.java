@@ -2,8 +2,8 @@ package ex0129.array.hw;
 
 class TwoDmArray {
 	//String을 저장하는 twoDmArray 배열 선언
-	String[][] twoDmArray = new String[10][10];
 	int n = 10;
+	String[][] twoDmArray = new String[n][n];
 	
 	//메소드 make2DmArray
 	//twoDmArray 배열에 값을 할당
