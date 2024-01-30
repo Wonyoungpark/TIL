@@ -1,11 +1,12 @@
-package ex0129.array.hw;
+package ex0130.constructor;
 
 public class StudentService {
 	private Student strArr[] = new Student[5];
 	private int count;
 	
+	
 	//초기 데이터 세팅
-	public void init() {
+	public StudentService() {
 		strArr[count++] = this.create("희희",33,"성남");
 		strArr[count++] = this.create("용용",28,"강동");
 		strArr[count++] = this.create("도도",18,"송파");
@@ -13,11 +14,7 @@ public class StudentService {
 	
 	//객체 생성
 	private Student create(String name,int age,String addr) {
-		Student st = new Student();
-		st.setName(name);
-		st.setAge(age);
-		st.setAddr(addr);
-		
+		Student st = new Student(name,age,addr);
 		return st;
 	}
 	
@@ -54,11 +51,10 @@ public class StudentService {
 		System.out.println("찾는 정보가 없습니다.");
 	}
 	
-	//이름으로 학생 나이,주소 정보 변경
+	//이름으로 학생의 주소 정보 변경
 	public void update(Student student) {
 		for(Student st:strArr) {
 			if(st.getName().equals(student.getName())) {
-				st.setAge(student.getAge());
 				st.setAddr(student.getAddr());
 				System.out.println("수정되었습니다.");
 				return;
