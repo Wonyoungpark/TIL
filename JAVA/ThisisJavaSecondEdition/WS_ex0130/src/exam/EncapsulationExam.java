@@ -3,9 +3,14 @@ package exam;
 import java.util.Scanner;
 
 public class EncapsulationExam {
-	int weight=50;
-	String pwd="hh";
+	int weight;
+	String pwd;
 	
+	public EncapsulationExam(int weight, String pwd) {
+		this.weight = weight;
+		this.pwd = pwd;
+	}
+
 	public int getWeight(String pwd) {
 		if(this.isPwd(pwd)) System.out.println("몸무게 : "+this.weight);
 		else System.out.println("비밀번호 불일치"+pwd);
@@ -20,15 +25,20 @@ public class EncapsulationExam {
 		if(this.isPwd(old)) this.pwd = neww;
 	}
 	
-	public boolean isPwd(String pwd) {
+	private boolean isPwd(String pwd) {
 		if(this.pwd.equals(pwd)) return true;
 		else return false;
+//		return this.pwd.equals(pwd);
 	}
 
 	public static void main(String args [] ) {
 		Scanner sc = new Scanner(System.in);
 		boolean run=true;
-		EncapsulationExam ex = new EncapsulationExam();
+		System.out.println("몸무게 설정> ");
+		int weight = sc.nextInt();
+		System.out.println("비밀번호 설정> ");
+		String pwd = sc.next();
+		EncapsulationExam ex = new EncapsulationExam(weight,pwd);
 		
 		while(run) {
 			
@@ -40,13 +50,13 @@ public class EncapsulationExam {
 			
 			if(n==1) {
 				System.out.print("비밀번호를 입력하세요");
-				String pwd = sc.next();
+				pwd = sc.next();
 				ex.getWeight(pwd);
 			} else if(n==2) {
 				System.out.print("비밀번호를 입력하세요");
-				String pwd = sc.next();
+				pwd = sc.next();
 				System.out.print("변경할 몸무게를 입력하세요");
-				int weight = sc.nextInt();
+				weight = sc.nextInt();
 				ex.setWeight(weight, pwd);
 			} else if(n==3) {
 				System.out.print("기존 비밀번호를 입력하세요");
