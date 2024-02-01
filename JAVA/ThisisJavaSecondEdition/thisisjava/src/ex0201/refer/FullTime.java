@@ -1,4 +1,4 @@
-package ex0131.hw;
+package ex0201.refer;
 
 public class FullTime {
 	private int empNo;
@@ -25,6 +25,31 @@ public class FullTime {
 		this.salary = salary;
 		this.bonus = bonus;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("FullTime [empNo=");
+		builder.append(empNo);
+		builder.append(", eName=");
+		builder.append(eName);
+		builder.append(", job=");
+		builder.append(job);
+		builder.append(", mgr=");
+		builder.append(mgr);
+		builder.append(", hiredate=");
+		builder.append(hiredate);
+		builder.append(", deptName=");
+		builder.append(deptName);
+		builder.append(", salary=");
+		builder.append(salary);
+		builder.append(", bonus=");
+		builder.append(bonus);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 	
 	public void message() {
 		System.out.println(eName+" 사원은 정규직입니다.");

@@ -1,4 +1,4 @@
-package ex0131.hw;
+package ex0201.refer;
 
 public class MainApp {
 
@@ -20,19 +20,11 @@ public class MainApp {
 		
 
 		System.out.println("********FullTime 정보************");
-		for(int i=0;i<3;i++) {
-			System.out.print(full[i].getEmpNo()+"|"+full[i].geteName()+"|"+full[i].getJob()
-					+"|"+full[i].getMgr()+"|"+full[i].getHiredate()+"|"+full[i].getDeptName()
-					+"|"+full[i].getSalary()+"|"+full[i].getBonus()+"\n");
-		}
+		for(FullTime f:full) System.out.println(f.toString());
 		System.out.println();
 		
 		System.out.println("********PartTime 정보************");
-		for(int i=0;i<2;i++) {
-			System.out.print(part[i].getEmpNo()+"|"+part[i].geteName()+"|"+part[i].getJob()
-					+"|"+part[i].getMgr()+"|"+part[i].getHiredate()+"|"+part[i].getDeptName()
-					+"|"+part[i].getTimePay()+"\n");
-		}
+		for(PartTime p:part) System.out.println(p.toString());
 		System.out.println();
 
 		System.out.println("******** Message ************");

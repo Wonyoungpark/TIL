@@ -1,20 +1,18 @@
-package ex0131.hw;
+package ex0201.refer;
 
-public class FullTime {
+public class PartTime {
 	private int empNo;
 	private String eName;
 	private String job;
 	private int mgr;
 	private String hiredate;
 	private String deptName;
-	private int salary;
-	private int bonus;
+	private int timePay;
 	
 	
-	public FullTime() {}
-	
-	public FullTime(int empNo, String eName, String job, int mgr, String hiredate, String deptName, int salary,
-			int bonus) {
+	public PartTime() {}
+
+	public PartTime(int empNo, String eName, String job, int mgr, String hiredate, String deptName, int timePay) {
 		super();
 		this.empNo = empNo;
 		this.eName = eName;
@@ -22,12 +20,32 @@ public class FullTime {
 		this.mgr = mgr;
 		this.hiredate = hiredate;
 		this.deptName = deptName;
-		this.salary = salary;
-		this.bonus = bonus;
+		this.timePay = timePay;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PartTime [empNo=");
+		builder.append(empNo);
+		builder.append(", eName=");
+		builder.append(eName);
+		builder.append(", job=");
+		builder.append(job);
+		builder.append(", mgr=");
+		builder.append(mgr);
+		builder.append(", hiredate=");
+		builder.append(hiredate);
+		builder.append(", deptName=");
+		builder.append(deptName);
+		builder.append(", timePay=");
+		builder.append(timePay);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	public void message() {
-		System.out.println(eName+" 사원은 정규직입니다.");
+		System.out.println(eName+" 사원은 비정규직입니다.");
 	}
 	
 	
@@ -67,17 +85,12 @@ public class FullTime {
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
-	public int getSalary() {
-		return salary;
+	public int getTimePay() {
+		return timePay;
 	}
-	public void setSalary(int salary) {
-		this.salary = salary;
+	public void setTimePay(int timePay) {
+		this.timePay = timePay;
 	}
-	public int getBonus() {
-		return bonus;
-	}
-	public void setBonus(int bonus) {
-		this.bonus = bonus;
-	}
+	
 	
 }

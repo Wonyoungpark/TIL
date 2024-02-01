@@ -9,6 +9,8 @@ public class PartTime {
 	private String deptName;
 	private int timePay;
 	
+	
+	public PartTime() {}
 
 	public PartTime(int empNo, String eName, String job, int mgr, String hiredate, String deptName, int timePay) {
 		super();
@@ -20,6 +22,12 @@ public class PartTime {
 		this.deptName = deptName;
 		this.timePay = timePay;
 	}
+	
+	
+	public void message() {
+		System.out.println(eName+" 사원은 비정규직입니다.");
+	}
+	
 	
 	public int getEmpNo() {
 		return empNo;
