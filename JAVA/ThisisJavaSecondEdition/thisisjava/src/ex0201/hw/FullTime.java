@@ -8,7 +8,7 @@ public class FullTime extends Employee {
 	public FullTime() {}
 	
 	public FullTime(int empNo, String eName, String job, int mgr, String hiredate, String deptName,int salary, int bonus) {
-		super(empNo,eName,job,mgr,hiredate,deptName);
+		super(empNo,eName,job,mgr,hiredate,deptName); //부모의 생성자
 		this.salary = salary;
 		this.bonus = bonus;
 	}

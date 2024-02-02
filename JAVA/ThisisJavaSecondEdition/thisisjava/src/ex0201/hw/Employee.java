@@ -1,6 +1,6 @@
 package ex0201.hw;
 
-abstract class Employee {
+public abstract class Employee {
 	private int empNo;
 	private String eName;
 	private String job;
