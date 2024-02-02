@@ -34,7 +34,11 @@ public class MainApp {
 		
 		//검색
 		Board search = boardService.selectBno(board.getBno());
-		
+
+		//추가된 메소드 호출
+		boardService.replyInsert();
+		//static 메소드 호출 //구현객체 없이 바로 접근 가능
+		BoardService.selectAll();//단, 오버라이딩 기능이 아님, 그냥 고정 후 사용
 	}
 	
 	public static void main(String[] args) {
