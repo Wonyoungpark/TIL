@@ -5,7 +5,7 @@ import pack1.A;
 import pack3.C;
 
 
-public class Main {
+public class  Main {
 	public static void main(String[] args) {
 		A a = new A();
 		a.method();
@@ -15,8 +15,8 @@ public class Main {
 //		b.method();
 		//my_module_a의 B를 A에 정의했기 때문에 B호출 가능
 		
-		C c = new C();
-		c.method();
+		C c2 = new C();
+		c2.method();
 	}
 }
 

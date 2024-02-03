@@ -23,5 +23,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="my_module_b" />
   </component>
 </module>
