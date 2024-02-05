@@ -3,5 +3,5 @@ module my_modlue_a {
 //	exports pack2;
 	
 	
-	 requires transitive my_module_b;
+//	 requires transitive my_module_b;
 }
