@@ -1,6 +1,6 @@
 package ex0206.hw;
 
-public class Student implements Comparable<Student> {
+public class Student implements Comparable<Student> { //Comparable로 구현
    private String sno;
    private String name;
    private int age;
@@ -57,6 +57,7 @@ public class Student implements Comparable<Student> {
 		return builder.toString();
 	}
 
+	//현재 객체와 인수로 전달된 객체를 비교
 	@Override
 	public int compareTo(Student o) {
 		return age - o.getAge();

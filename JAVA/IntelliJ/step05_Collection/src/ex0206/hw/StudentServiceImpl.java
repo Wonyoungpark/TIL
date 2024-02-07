@@ -2,6 +2,7 @@ package ex0206.hw;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
@@ -39,31 +40,62 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public boolean delete(String sno) {
-		for(Student s: list){
-			if(s.getSno().equals(sno)) return list.remove(s);
-		}
-		return false;
+
+//		for(Student s: list){
+//			if(s.getSno().equals(sno)) return list.remove(s);
+//		}
+//		return false;
+
+		Student student = this.selectBySno(sno);
+		return list.remove(student);
 	}
 
 	@Override
 	public boolean update(Student student) {
-		for(Student s:list){
-			if(s.getSno().equals(student.getSno())){
-				Student s1 = selectBySno(student.getSno());
-				s1.setAge(student.getAge());
-				s1.setAddr(student.getAddr());
-				return true;
-			}
-		}
-		return false;
+//		for(Student s:list){
+//			if(s.getSno().equals(student.getSno())){
+//				Student s1 = selectBySno(student.getSno());
+//				s1.setAge(student.getAge());
+//				s1.setAddr(student.getAddr());
+//				return true;
+//			}
+//		}
+//		return false;
+
+		Student searchStudent = this.selectBySno(student.getSno());
+		if(searchStudent==null) return false;
+		searchStudent.setAge(student.getAge());
+		searchStudent.setAddr(student.getAddr());
+		return true;
 	}
 
 	@Override
 	public List<Student> sortByAge() {
 		List<Student> stulist = new ArrayList<>(list);
+
 		Collections.sort(stulist);
+
+//		//Comparator 사용
+//		Collections.sort(stulist, new SortComparatorTest());
+		//but, 일회성 사용일 경우, 따로 클래스 생성을 권장하지 않음
+
+//		//익명클래스를 사용해서 Comparator 구현
+//		Collections.sort(stulist, new Comparator<Student>() {
+//			@Override
+//			public int compare(Student o1, Student o2) {
+//				return o1.getAge()-o2.getAge();
+//			}
+//		});
+
 		return stulist;
 	}
+}
 
+//Comparator 구현 객체
+class SortComparatorTest implements Comparator<Student>{
 
+	@Override
+	public int compare(Student o1, Student o2) {
+		return o1.getAge()-o2.getAge();
+	}
 }
