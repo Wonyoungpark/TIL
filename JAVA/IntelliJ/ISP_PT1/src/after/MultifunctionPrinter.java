@@ -1,3 +1,5 @@
+package after;
+
 public class MultifunctionPrinter implements Fax, Printer, Copy {
 
     @Override

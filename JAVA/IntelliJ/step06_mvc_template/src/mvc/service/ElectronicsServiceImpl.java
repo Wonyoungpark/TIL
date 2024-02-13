@@ -45,10 +45,14 @@ public class ElectronicsServiceImpl implements ElectronicsService {
 	@Override
 	public void insert(Electronics electronics) throws ElectronicsArrayBoundsException {
 		if(list.size()>MAX_SIZE) throw new ElectronicsArrayBoundsException("배열의 길이를 벗어나 더이상 등록 할수 없습니다.");
-		for(Electronics e:list){
-			if(e.getModelNo()==electronics.getModelNo()) throw new ElectronicsArrayBoundsException("모델 번호가 중복이므로 등록할 수 없습니다.");
+
+		//예외가 발생할 경우(번호가 없을 경우) insert가 일어나야 한다.
+		try{
+			this.searchByModelNo(electronics.getModelNo());
+			throw new ElectronicsArrayBoundsException("모델 번호가 중복이므로 등록할 수 없습니다.");
+		} catch(SearchNotFoundException e){ //모델 중복 발생이 안 일어났다.
+			list.add(electronics);
 		}
-		list.add(electronics);
 	}
 
 	@Override

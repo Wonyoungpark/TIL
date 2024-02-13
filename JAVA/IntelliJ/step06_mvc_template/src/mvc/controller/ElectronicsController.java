@@ -41,8 +41,7 @@ public class ElectronicsController {
             FailView.errorMessage(e.getMessage());
         }
     }
-    
-    
+
 
     /**
      * 모델번호에 해당하는 전자제품 검색
