@@ -17,6 +17,7 @@ public class KeyboardHw {
                 System.out.println(data);
                 bw.write(data);
                 bw.newLine();
+                bw.flush();
             }
         }catch(Exception e){
             e.printStackTrace();

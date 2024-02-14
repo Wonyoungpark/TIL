@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Menu {
     Scanner sc = new Scanner(System.in);
-    ProfileHw prof = new ProfileHw();
 
     public void printMenu() throws Exception {
         while(true){

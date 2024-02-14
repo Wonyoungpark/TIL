@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="before">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ISP_PT1/src/before.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

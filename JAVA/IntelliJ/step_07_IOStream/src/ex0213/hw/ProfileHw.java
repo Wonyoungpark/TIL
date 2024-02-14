@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class ProfileHw {
-    public ProfileHw(){}
 
     public ProfileHw(String name) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader("src/ex0213/hw/"+name+".txt"));

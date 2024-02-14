@@ -1,6 +1,10 @@
 package before;
 
-public class Printer extends MultifunctionPrinter  {
+public class Printer implements MultifunctionPrinter  {
     @Override
-    public void print(){}
+    public void fax() {}
+    @Override
+    public void copy() {}
+    @Override
+    public void print() {}
 }
