@@ -6,7 +6,10 @@ import java.util.Scanner;
 public class ProfileHw {
 
     public ProfileHw(String name) throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader("src/ex0213/hw/"+name+".txt"));
+        File file = new File("src/ex0213/hw/"+name+".txt");
+        if(!file.exists()) throw new IOException(name+"에 해당하는 정보는 없습니다.");
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
         try(br){
             String data [] = br.readLine().split(":");
             System.out.println(name+"님 몸무게는 "+data[0]+"kg 이고 비번은 "+data[1]+" 입니다.");

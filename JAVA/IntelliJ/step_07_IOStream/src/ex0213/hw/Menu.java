@@ -28,7 +28,8 @@ public class Menu {
         System.out.print("이름> ");
         String name = sc.nextLine();
         System.out.print("몸무게> ");
-        int weight = Integer.parseInt(sc.nextLine());
+        int weight = sc.nextInt();
+        sc.nextLine();
         System.out.print("비밀번호> ");
         String pwd = sc.nextLine();
         System.out.println("입력 완료");
