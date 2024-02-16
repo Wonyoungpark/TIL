@@ -1,8 +1,6 @@
 package mvc.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,24 +23,38 @@ public class ElectronicsServiceImpl implements ElectronicsService {
     private static final int MAX_SIZE = 10;
     List<Electronics> list = new ArrayList<Electronics>();
 
+    private File file = new File("ssrc/mvc/sevice/save.txt");
+
     /**
      * 외부에서 객체 생성안됨.
      * InitInfo.properties파일을 로딩하여  List에 추가하여
      * 초기치 데이터를 만든다.
      */
+    @SuppressWarnings("unchecked")
     private ElectronicsServiceImpl() throws Exception { //싱글톤 클래스
         //save.txt 존재 확인 후, 없으면 ResourceBundle을 통해 list 데이터를 저장
         //있다면, save.txt 파일을 로딩해서 list를 복원
-        File file = new File("step_06_mvc_ObjectSave/src/mvc/sevice/save.txt");
-        if (!file.exists()) {
-//            ResourceBundle rb = ResourceBundle.getBundle("mvc/service/InitInfo");
-            ResourceBundle rb = ResourceBundle.getBundle(file.getName());
-            for (String key : rb.keySet()) {
-                String value = rb.getString(key);
-                String v[] = value.split(",");
-                list.add(new Electronics(Integer.parseInt(v[0]), v[1], Integer.parseInt(v[2]), v[3]));
-                System.out.println("저장 완료");
+        try{
+            if (!file.exists()) {
+                try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream((new FileInputStream(file))));) {
+                    Object obj = ois.readObject();
+                    if (obj instanceof List) {
+                        list = (List<Electronics>)obj;
+                    }
+                }
+            } else {
+                ResourceBundle rb = ResourceBundle.getBundle("mvc/service/InitInfo");
+                for (String key : rb.keySet()) {
+                    String value = rb.getString(key);
+                    String v[] = value.split(",");
+                    list.add(new Electronics(Integer.parseInt(v[0]), v[1], Integer.parseInt(v[2]), v[3]));
+                    System.out.println("저장 완료");
+                }
             }
+
+        }
+
+
         } else {
             BufferedReader br = new BufferedReader(new FileReader(file));
             try (br) {
@@ -110,6 +122,9 @@ public class ElectronicsServiceImpl implements ElectronicsService {
     @Override
     public void saveObject() {
         //list를 save.txt에 저장한다.
+        try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+            oos.writeObject(list);
+        }
     }
 
 } // 클래스 끝 

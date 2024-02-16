@@ -94,6 +94,8 @@ public class ElectronicsController {
         SuccessView.printAll(service.selectSortByPrice());
     }
 
+    public void saveObject() { SuccessView.printAll(service.saveObject());
+    }
 }
 
 
