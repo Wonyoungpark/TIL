@@ -29,8 +29,12 @@ public class BeepPrintExample {
 //			}catch(InterruptedException e) {}
 //		}
 		
-//		Task task = new Task();
-		Thread thread2 = new Thread(new Task());
+//		Runnable task = new Task();
+//		Thread thread2 = new Thread(task);
+//		thread2.start();
+		
+		PrintThread pt = new PrintThread();
+		pt.start();
 	}
 
 }
