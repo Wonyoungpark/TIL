@@ -111,6 +111,7 @@ insert into member(id,name,addr) values('bb','가나다','서울시 강남');
 insert into member(id,name,jumin) values('FF','A','B');
 insert into member(id,name,jumin) values('GG','A ','B ');
 
+
 --VARCHAR2 검색 --가변길이는 공백을 문자열로 인식
 SELECT * FROM MEMBER WHERE NAME='A';
 SELECT * FROM MEMBER WHERE NAME='A ';
@@ -122,6 +123,28 @@ SELECT * FROM MEMBER WHERE JUMIN='B  ';
 
 SELECT NAME,JUMIN,LENGTH(NAME), LENGTH(JUMIN) FROM MEMBER WHERE ID='FF';
 
+
+-- 하나의 테이블에 두개의 컬럼을 하나로 묶어서 PK 설정
+CREATE TABLE MEMBER(
+    ID VARCHAR2(20),
+    NAME VARCHAR2(30) NOT NULL,
+    JUMIN CHAR(13),
+    AGE NUMBER(3),
+    REG_DATE DATE,
+    CONSTRAINT MEMBER_ID_JUMIN_PK PRIMARY KEY(ID,JUMIN) --MEMBER TABLE의 ID와 JUMIN을 PK로 설정
+);
+
+--테이블 구조 확인
+DESC MEMBER;
+
+--레코드 추가
+INSERT INTO MEMBER VALUES('HONG','길동','11111-22222',20,SYSDATE);
+INSERT INTO MEMBER VALUES('HONG','길동2','11111-33333',20,SYSDATE); --ID와 JUMIN이 모두 일치하면 중복
+
+
+--테이블 검색
+SELECT * FROM MEMBER;
+    
 ----------------------------------------------------------------------------
 /*
   2) FOREIGN KEY - FK = 외래키
@@ -146,9 +169,52 @@ SELECT NAME,JUMIN,LENGTH(NAME), LENGTH(JUMIN) FROM MEMBER WHERE ID='FF';
      
 */
 
+-- SCOTT계정 접속
+select * from emp;
+    --MGR(관리자 번호)는 EMPNO를 FK로 참조 -- 재귀적 설계이다.
+
+-- test 계정 FK 실습
+-- 부서 테이블
+CREATE TABLE DEPT(
+    DEPT_CODE CHAR(3) CONSTRAINT DEPT_CODE_PK PRIMARY KEY,
+    DNAME VARCHAR2(30) NOT NULL,
+    LOC VARCHAR2(30)
+);
+
+--샘플 레코드 추가
+INSERT INTO DEPT VALUES('A01','경리부','서울');
+INSERT INTO DEPT VALUES('A02','교육부','대구');
+INSERT INTO DEPT VALUES('A03','인사부','서울');
+
+--레코드 검색
+SELECT * FROM DEPT;
 
 
+--사원 테이블 생성
+CREATE TABLE EMP(
+    EMP_NO NUMBER(3) CONSTRAINT EMP_NO_PK PRIMARY KEY,
+    ENAME VARCHAR2(15) NOT NULL,
+    SAL NUMBER(5),
+    DEPT_CODE CHAR(3) CONSTRAINT EMP_DEPT_CODE_FK REFERENCES DEPT(DEPT_CODE),
+    HIRE_DATE DATE DEFAULT SYSDATE --현재 날짜 기본 설정
+);
 
+SELECT * FROM EMP;
+SELECT * FROM DEPT;
+
+--사원 등록
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(1,'길동',300,'A01');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(2,'나영',200,'A01');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(3,'미미',200,NULL);
+
+
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(4,'삼식',100,'A05'); --부모키가 존재하지 않기 때문에 불가
+
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE,HIRE_DATE) values(4,'삼식',100,'A02','2024-01-20');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE,HIRE_DATE) values(5,'삼식',100,'A02',NULL);
+
+INSERT INTO EMP values(6,'삼식',100,'A02'); --컬럼명을 명시하지 않았기 때문에, 값을 덜 주면 오류
+INSERT INTO EMP values(6,'삼식',100,'A02',DEFAULT);
 
 
 --삭제
@@ -165,8 +231,81 @@ SELECT NAME,JUMIN,LENGTH(NAME), LENGTH(JUMIN) FROM MEMBER WHERE ID='FF';
       
 */
 --현재 상황을 모두 저장완료
+COMMIT;
+SELECT * FROM EMP;
+
+--레코드 삭제
+DELETE FROM EMP;
+
+--복구
+ROLLBACK;
 
 
+--부모테이블에서 참조되고 있지 않은 레코드를 삭제 (DPET)
+DELETE FROM DEPT WHERE DEPT_CODE='A03';
+
+--부모 테이블의 참조되고 있는 레코드를 삭제(DEPT)
+DELETE FROM DEPT WHERE DEPT_CODE='A02'; --무결성 위반으로 삭제 불가
+
+-- -> 부모를 참조하는 자식 레코드를 먼저 삭제한 후, 부모레코드를 삭제
+DELETE FROM EMP WHERE DEPT_CODE='A02';
+DELETE FROM DEPT WHERE DEPT_CODE='A02';
+
+
+
+-- ON DELETE CASCADE vs ON DELETE SET NULL
+
+drop table emp;
+--사원 테이블 생성
+CREATE TABLE EMP(
+    EMP_NO NUMBER(3) CONSTRAINT EMP_NO_PK PRIMARY KEY,
+    ENAME VARCHAR2(15) NOT NULL,
+    SAL NUMBER(5),
+    DEPT_CODE CHAR(3) CONSTRAINT EMP_DEPT_CODE_FK REFERENCES DEPT(DEPT_CODE) on delete cascade,
+    HIRE_DATE DATE DEFAULT SYSDATE --현재 날짜 기본 설정
+);
+insert into dept values('A02','인사부','대구');
+select * from dept;
+--EMP레코드 추가
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(1,'길동',300,'A01');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(2,'나영',200,'A01');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(3,'미미',200,NULL);
+
+--부모 테이블을 참조하는 레코드 삭제(dept)
+DELETE DEPT WHERE DEPT_CODE='A01';
+
+
+drop table emp;
+--사원 테이블 생성
+CREATE TABLE EMP(
+    EMP_NO NUMBER(3) CONSTRAINT EMP_NO_PK PRIMARY KEY,
+    ENAME VARCHAR2(15) NOT NULL,
+    SAL NUMBER(5),
+    DEPT_CODE CHAR(3) CONSTRAINT EMP_DEPT_CODE_FK REFERENCES DEPT(DEPT_CODE) on delete set null,
+    HIRE_DATE DATE DEFAULT SYSDATE --현재 날짜 기본 설정
+);
+INSERT INTO DEPT VALUES('A01','경리부','서울');
+select * from emp;
+--EMP레코드 추가
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(1,'길동',300,'A01');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(2,'나영',200,'A01');
+INSERT INTO EMP(EMP_NO,ENAME,SAL,DEPT_CODE) values(3,'미미',200,NULL);
+
+--부모 테이블을 참조하는 레코드 삭제(dept)
+DELETE DEPT WHERE DEPT_CODE='A01';
+
+
+--FK설정을 SQL문장 맨 뒤에서 작성하는 경우
+drop table emp;
+--사원 테이블 생성
+CREATE TABLE EMP(
+    EMP_NO NUMBER(3) CONSTRAINT EMP_NO_PK PRIMARY KEY,
+    ENAME VARCHAR2(15) NOT NULL,
+    SAL NUMBER(5),
+    DEPT_CODE CHAR(3),
+    HIRE_DATE DATE DEFAULT SYSDATE, --현재 날짜 기본 설정
+    CONSTRAINT EMP_DEPT_CODE_FK FOREIGN KEY(DEPT_CODE) REFERENCES DEPT(DEPT_CODE) on delete set null
+);
 
 ---------------------------------------------------------------
 /*
@@ -186,7 +325,27 @@ SELECT NAME,JUMIN,LENGTH(NAME), LENGTH(JUMIN) FROM MEMBER WHERE ID='FF';
       : NOT NULL을 설정하면 DEFALUT를 함께 사용할때는 반드시 DEFAULT를 먼저 작성한다.
 */
 
+CREATE TABLE TEST(
+    ID VARCHAR2(10) PRIMARY KEY, --PK별칭 생략
+    JUMIN CHAR(13) NOT NULL UNIQUE,
+    NAME VARCHAR2(10) UNIQUE,
+    AGE NUMBER(2) CHECK (AGE>=20 AND AGE<=30),
+    GENDER CHAR(3) CHECK (GENDER='남' OR GENDER='여'),
+    REG_DATE DATE DEFAULT SYSDATE NOT NULL --DEFAULT가 반드시 앞에 와야 함
+);
 
+DESC TEST;
+
+SELECT * FROM TEST;
+
+--레코드 추가
+INSERT INTO TEST(ID,JUMIN, NAME) VALUES('HONG','111','길동');
+INSERT INTO TEST(ID,JUMIN, NAME) VALUES('GIL','222',NULL);
+INSERT INTO TEST(ID,JUMIN, NAME) VALUES('KING','333',NULL);
+
+INSERT INTO TEST(ID,JUMIN, NAME) VALUES('AAA','333','나영'); --UNIQUE 중복 불가
+INSERT INTO TEST(ID,JUMIN, NAME, AGE, GENDER) VALUES('BB','55','나영',22,'남');
+INSERT INTO TEST(ID,JUMIN, NAME, AGE, GENDER) VALUES('CC','44','나영3',25,'여');
 
 ---------------------------------------------------------------------------------------------------
 /*
@@ -217,6 +376,24 @@ SELECT NAME,JUMIN,LENGTH(NAME), LENGTH(JUMIN) FROM MEMBER WHERE ID='FF';
 
 */
 
+drop table test;
+
+create table test(
+  id varchar2(20),
+  name varchar2(10),
+  gender char(3)
+);
+
+desc test;
+
+--제약 조건 추가
+alter table TEST add constraint test_id_pk primary key(id);
+--name not null 설정
+alter table test modify name not null;
+--gender default 설정
+alter table test modify (gender default '남');
+
+select REG_DATE,id from member;
 ---------------------------------------------------------------------------
 /*
 SQL의 종류
@@ -251,4 +428,40 @@ SQL의 종류
    AS 복사할테이블정보;
    
    
-    주의 : 테이블을 복사하면 제약조건은 복사 안된다!!! - 복사한후에 제약조건을 ALTER를 이용해서 추가한다.
+    주의 : 테이블을 복사하면 제약조건은 복사 안된다!!! - 복사한후에 제약조건을 ALTER를 이용해서 추가한다.*/
+
+
+--SCOTT 계정
+-- 1)모든 레코드&컬럼 복사
+CREATE TABLE COPY_EMP
+AS SELECT * FROM EMP; --제약 조건 복사 안됨
+
+SELECT * FROM COPY_EMP;
+ALTER TABLE COPY_EMP ADD CONSTRAINT COPY_EMP_NO_PK PRIMARY KEY(EMPNO); --제약 조건 추가
+
+--2)조건에 만족하는 특정 레코드와 특정 컬럼의 정보만 복사하고 싶다.
+CREATE TABLE COPY_EMP2
+AS SELECT EMPNO, ENAME, JOB, HIREDATE FROM EMP WHERE SAL>2500;
+
+SELECT * FROM COPY_EMP2;
+
+--3)구조만 복사
+CREATE TABLE COPY_EMP3
+AS SELECT * FROM EMP WHERE 1=0; --조건이 불만족
+
+SELECT * FROM COPY_EMP3;
+
+COMMIT;
+
+--레코드 수정(COPY_EMP)
+SELECT * FROM COPY_EMP3;
+ROLLBACK;
+
+--ex)empno가 7499인 사원의 job을 teacher, enmae을 heedong 변경
+UPDATE copy_emp
+SET job='TEACHER', ename='HEEDONG'
+WHERE empno=7499;
+
+UPDATE copy_emp
+SET job='TEACHER', ename='HEEDONG'
+WHERE sal>9000;
