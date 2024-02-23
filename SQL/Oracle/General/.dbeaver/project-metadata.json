@@ -1,0 +1,1 @@
+{"resources":{"Scripts/JOIN_SET_SUBQUERYsql.sql":{"default-datasource":"oracle_thin-18dd3d25853-7a69a009ba90a65e","default-schema":"SCOTT"},"Scripts/Script.sql":{"default-datasource":"oracle_thin-18dd3d3c0b8-412bc8fa4b081c67","default-schema":"C##TEST"},"Scripts/Subquery_prob.sql":{"default-datasource":"oracle_thin-18dd3d44a05-7e7a99708d3fd487","default-schema":"WS"}}}

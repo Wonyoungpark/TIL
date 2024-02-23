@@ -52,3 +52,28 @@ SELECT user_seq,name, substr(email,0,instr(email,'@')-1) AS email_id FROM users;
 
 SELECT * FROM users;
 SELECT user_seq,name, email, REPLACE(phone,'-','') AS phone_short FROM users;
+
+SELECT COUNT(*) FROM ACCOUNT a WHERE USER_SEQ =222;
+
+SELECT sum(balance) balance_sum FROM account;
+
+SELECT * FROM account;
+
+SELECT user_seq,sum(balance) AS 전체계좌잔고, count(USER_SEQ)
+FROM ACCOUNT a 
+WHERE USER_SEQ IS NOT NULL 
+GROUP BY USER_SEQ ;
+
+SELECT min(balance) balance_min, max(balance) balance_max
+FROM ACCOUNT a ;
+
+SELECT USER_SEQ ,count(USER_SEQ) AS user_accout_cnt
+FROM ACCOUNT a 
+WHERE USER_SEQ IS NOT NULL
+GROUP BY USER_SEQ ;Dta2sxbaqGcW3K@
+
+SELECT USER_SEQ, sum(BALANCE) user_balance_sum
+FROM ACCOUNT
+WHERE USER_SEQ IS NOT NULL
+GROUP BY USER_SEQ
+HAVING sum(BALANCE)<=10000;

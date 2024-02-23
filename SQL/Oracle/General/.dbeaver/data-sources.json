@@ -1,0 +1,121 @@
+{
+	"folders": {},
+	"connections": {
+		"oracle_thin-18dd3cf6d72-6aa8d20ccbe67ac0": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "cloudDB",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "ORCL",
+				"url": "jdbc:oracle:thin:@n0oqo206i9w839bd_high?TNS_ADMIN\u003d/Users/holly/workspace/Wallet_N0OQO206I9W839BD",
+				"configurationType": "URL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "CUSTOM",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-18dd3d25853-7a69a009ba90a65e": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "scottDB",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "ORCLCDB",
+				"url": "jdbc:oracle:thin:@//localhost:1521/ORCLCDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-18dd3d357f5-453057ff4dd02252": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "ORCLCDB 2",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "ORCLCDB",
+				"url": "jdbc:oracle:thin:@//localhost:1521/ORCLCDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-18dd3d3c0b8-412bc8fa4b081c67": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "testDB",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "ORCLCDB",
+				"url": "jdbc:oracle:thin:@//localhost:1521/ORCLCDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-18dd3d44a05-7e7a99708d3fd487": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "wsDB",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "ORCLCDB",
+				"url": "jdbc:oracle:thin:@//localhost:1521/ORCLCDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": false,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 3600
+		}
+	}
+}
