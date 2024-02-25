@@ -60,34 +60,69 @@ SELECT *FROM subdept;
 ------------------------------------------------------
 
 --ex1) 이종길 사원의 부서명(dname)을 검색하시오.
+SELECT dname FROM SUBDEPT s WHERE DEPT_ID =(SELECT DEPT_ID FROM SUBEMP s2 WHERE emp_name='이종길');
 
 --ex2) dept_id가 100인 사원급여의 최대값보다 많이 받는 사원을 검색하시오.
+SELECT * FROM SUBEMP s WHERE sal> (SELECT max(sal) FROM SUBEMP WHERE DEPT_ID =100);
 
---ex3)급여를 3000이상 받는 사원이 소속된 부서와 
- --  동일한 부서에서 근무하는 사원들의 정보
+--ex3)급여를 3000이상 받는 사원이 소속된 부서와 동일한 부서에서 근무하는 사원들의 정보
+SELECT * FROM SUBEMP s WHERE DEPT_ID IN (SELECT DEPT_ID FROM SUBEMP s2 WHERE sal>=3000);
 
-  --ex4) 부서번호가 300인 사원들중에서 급여를 가장 많이 받는 사원보다
-      더 많은 급여를 받는 사람의 정보를 검색.
+--ex4) 부서번호가 300인 사원들중에서 급여를 가장 많이 받는 사원보다 더 많은 급여를 받는 사람의 정보를 검색.
+SELECT * FROM SUBEMP s WHERE sal>ALL (SELECT sal FROM SUBEMP s2 WHERE DEPT_ID=300);
 
-   
--- ex5) 부서번호가 300인 사원들중에서 급여를 가장 적게 받는 사원보다
---     더 많은 급여를 받는 사람의 정보를 검색
+-- ex5) 부서번호가 300인 사원들중에서 급여를 가장 적게 받는 사원보다 더 많은 급여를 받는 사람의 정보를 검색
+SELECT * FROM SUBEMP s WHERE sal IN (SELECT sal FROM SUBDEPT s2 WHERE DEPT_ID=300);
    
 --ex6)정동길의 급여와 동일 하거나 더 많이 받는 사원의 정보검색
- 
+SELECT * FROM SUBEMP WHERE sal>=(SELECT sal FROM SUBEMP s WHERE emp_name='정동길');
+
 --ex7)직급이 사무직인 사원의 부서번호와 부서명 출력
+SELECT s.dept_id, s.dname
+FROM SUBDEPT s 
+INNER JOIN SUBEMP s2 
+ON s.DEPT_ID =s2.DEPT_ID 
+WHERE job='사무직';
 
 --ex8) 부서가 경리부인 모든 사원의 정보출력
+SELECT * FROM SUBEMP s
+INNER JOIN SUBDEPT s2 
+ON s.DEPT_ID =s2.DEPT_ID 
+WHERE s2.DNAME ='경리부';
+
 --ex9)대표 에게 보고를 하는 모든 사원의 정보출력
+SELECT * FROM SUBEMP s WHERE job!='대표';
 
 --ex10) 이름에 '정'이 들어가면서 평균급여보다 높은 급여를 받는
 --     사원과 동일한 부서에서 근무하는 사원의 정보 검색.
 --      (단, 부서번호 null은 제외함)
-      
---ex11) 각 부서의 어떤 평균 급여보다 급여를 많이 
---      받는 사원의 정보를 검색
+SELECT * FROM SUBEMP s
+WHERE EMP_NAME LIKE '%정%' AND sal>=(SELECT avg(SAL) FROM SUBEMP s2 ) AND DEPT_ID IS NOT NULL;
+
+--ex11) 각 부서의 어떤 평균 급여보다 급여를 많이 받는 사원의 정보를 검색
+SELECT * FROM SUBEMP s 
+WHERE sal>any(SELECT avg(SAL) FROM SUBEMP s2 GROUP BY DEPT_ID);
+
+--ex12)  모든 사무직 사원보다 급여가 적으면서 사무직이 아닌 모든 사원의 정보검색
+SELECT * FROM SUBEMP s WHERE sal<all(SELECT sal FROM SUBEMP s2 WHERE job='사무직') AND job!='사무직';
 
 
 
---ex12)  모든 사무직 사원보다 급여가 적으면서 사무직이
--- 아닌 모든 사원의 정보검색
+-----------------
+
+SELECT * FROM STUDENT s where 수_주민등록번호 LIKE '______-2%';
+
+SELECT * FROM STUDENT s WHERE substr(수_주민등록번호,1,2)='73';
+
+SELECT * FROM TEACHER t WHERE 강사이름 NOT LIKE '홍%';
+
+SELECT * FROM TEACHER t WHERE 주소 LIKE '%강남구%';
+
+SELECT * FROM TEACHER t WHERE 수강코드=(SELECT 수강코드 FROM subject WHERE 과목='java');
+
+SELECT * FROM TEACHER t WHERE 주소 IS NOT NULL;
+
+SELECT 수_이름,수_주민등록번호, decode(substr(수_주민등록번호,8,1),1,'남자','여자')
+FROM STUDENT s ;
+
+SELECT rownum,강사이름,연락처,주소 FROM (SELECT * FROM TEACHER t ORDER BY 강사이름);
