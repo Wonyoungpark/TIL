@@ -9,3 +9,5 @@ Create Table subemp(
 	hiredate date Not Null, --입사일
 	constraint emp_id_pk22 Primary Key(emp_id) --제약조건
 );
+
+DROP TABLE subemp;

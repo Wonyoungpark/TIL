@@ -92,6 +92,7 @@ WHERE s2.DNAME ='경리부';
 
 --ex9)대표 에게 보고를 하는 모든 사원의 정보출력
 SELECT * FROM SUBEMP s WHERE job!='대표';
+SELECT * FROM SUBEMP s WHERE MGR_ID =(SELECT EMP_ID FROM SUBEMP s2 WHERE job='대표');
 
 --ex10) 이름에 '정'이 들어가면서 평균급여보다 높은 급여를 받는
 --     사원과 동일한 부서에서 근무하는 사원의 정보 검색.
@@ -121,6 +122,22 @@ SELECT * FROM TEACHER t WHERE 주소 LIKE '%강남구%';
 SELECT * FROM TEACHER t WHERE 수강코드=(SELECT 수강코드 FROM subject WHERE 과목='java');
 
 SELECT * FROM TEACHER t WHERE 주소 IS NOT NULL;
+
+
+--7번
+SELECT 수강코드 FROM SUBJECT s WHERE upper(과목)=upper('sql');
+SELECT 수강번호 FROM SUGAGN s WHERE 수강코드=(SELECT 수강코드 FROM subject WHERE 과목='sql');
+SELECT * FROM STUDENT s ;
+SELECT * FROM SUBJECT s ;
+SELECT * FROM SUGAGN s ;
+
+SELECT *
+FROM SUGAGN s
+ JOIN STUDENT s3 using(수강생번호)
+ JOIN SUBJECT s2 USING (수강코드)
+WHERE s2.과목='sql';
+
+
 
 SELECT 수_이름,수_주민등록번호, decode(substr(수_주민등록번호,8,1),1,'남자','여자')
 FROM STUDENT s ;
