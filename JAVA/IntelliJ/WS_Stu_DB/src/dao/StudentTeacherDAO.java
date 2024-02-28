@@ -9,7 +9,7 @@ import java.util.List;
 public interface StudentTeacherDAO {
 	/**
 	 * 1번 : 성별이 여자인 학생의 정보 검색
-       select * from student where  수_주민등록번호 like '%-2%'
+       select * from student where  수_주민등록번호 like '%-2%' //결과값이 여러개 나올 수 있음
 	 * */
 	public List<Student> getGenderByWomen();
 	
