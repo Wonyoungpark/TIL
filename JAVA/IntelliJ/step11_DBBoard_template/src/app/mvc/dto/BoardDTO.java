@@ -9,9 +9,11 @@ public class BoardDTO {
 	private String writer; // 작성자
 	private String content; // 내용
 	private String boardDate; // 등록일
-	
-	
-	
+
+
+	//리스트
+	private List<ReplyDTO> replieslist;
+
 	public BoardDTO() {}
 
 	public BoardDTO(int boardNo, String subject, String writer, String content, String boardDate) {
@@ -62,10 +64,15 @@ public class BoardDTO {
 	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
-	
-	
-	
-	
+
+
+	public List<ReplyDTO> getReplieslist() {
+		return replieslist;
+	}
+
+	public void setReplieslist(List<ReplyDTO> replieslist) {
+		this.replieslist = replieslist;
+	}
 
 	@Override
 	public String toString() {

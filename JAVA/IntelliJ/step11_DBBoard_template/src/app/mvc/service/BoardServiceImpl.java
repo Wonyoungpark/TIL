@@ -21,9 +21,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	@Override
 	public List<BoardDTO> boardSelectAll() throws SearchWrongException {
-		
-		
-		return null;
+		List<BoardDTO> list = boardDao.boardSelectAll();
+		if(list.isEmpty()) throw new SearchWrongException("검색된 레코드가 없습니다.");
+		return list;
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void boardInsert(BoardDTO boardDTO) throws DMLException {
-		// TODO Auto-generated method stub
-
+		int result = boardDao.boardInsert(boardDTO);
+		if(result==0) throw new DMLException("등록되지 않았습니다.");
 	}
 
 	@Override

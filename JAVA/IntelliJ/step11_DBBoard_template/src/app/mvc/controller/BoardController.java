@@ -1,7 +1,6 @@
 package app.mvc.controller;
 
-import java.util.List;
-
+import app.mvc.dao.BoardDAO;
 import app.mvc.dto.BoardDTO;
 import app.mvc.dto.ReplyDTO;
 import app.mvc.exception.DMLException;
@@ -11,6 +10,7 @@ import app.mvc.service.BoardServiceImpl;
 import app.mvc.view.FailView;
 import app.mvc.view.SuccessView;
 
+import java.util.List;
 
 
 public class BoardController {
@@ -21,8 +21,12 @@ public class BoardController {
     * 전체검색
     * */
    public static void boardSelectByAll() {
-	   
-	   
+		try{
+			List<BoardDTO> list = boardService.boardSelectAll();
+			SuccessView.selectPrint(list);
+		}catch (SearchWrongException e){
+			FailView.errorMessage(e.getMessage());
+		}
    }
     /**
      * 글번호에 해당하는 게시물 검색
@@ -44,7 +48,12 @@ public class BoardController {
 	 * 게시물 등록하기 
 	 * */
 	public static void boardInsert(BoardDTO board) {
-		
+		try{
+			boardService.boardInsert(board);
+			SuccessView.messagePrint("등록되었습니다.");
+		}catch(DMLException e){
+			FailView.errorMessage(e.getMessage());
+		}
 		
 	}
 	

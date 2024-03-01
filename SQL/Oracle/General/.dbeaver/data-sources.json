@@ -100,6 +100,26 @@
 				},
 				"auth-model": "oracle_native"
 			}
+		},
+		"oracle_thin-18df2a6b587-2df0eba78cbeb787": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "ORCL",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "ORCL",
+				"url": "jdbc:oracle:thin:@kosinovation_high?TNS_ADMIN\u003d/Users/holly/workspace/KOS-INOVATION/Wallet_KOSINOVATION",
+				"configurationType": "URL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "CUSTOM",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
 		}
 	},
 	"connection-types": {

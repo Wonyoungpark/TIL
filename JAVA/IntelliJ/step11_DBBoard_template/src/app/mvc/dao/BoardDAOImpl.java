@@ -26,7 +26,22 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardDTO> boardSelectAll() throws SearchWrongException {
-		
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select * from board order by board_no desc";
+		List<BoardDTO> list=new ArrayList<>();
+
+		try{
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			////추가하기
+		}catch (SQLException e){
+			e.printStackTrace();
+			throw new SearchWrongException("DB에 문제가 있어 다시 진행해주세요");
+		}finally {
+			DBManager.releaseConnection(con,ps,rs);
+		}
 		return null;
 	}
 

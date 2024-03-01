@@ -11,11 +11,11 @@ CONNECT BY PRIOR empno = mgr;
 
 ---------------------
 CREATE TABLE BOM (
-            ITEM_ID     INTEGER NOT NULL,
-            PARENT_ID   INTEGER references BOM(item_id),
-            ITEM_NAME   VARCHAR2(20)  NOT NULL,
-            ITEM_QTY    INTEGER, 
-            PRIMARY KEY (ITEM_ID)
+  ITEM_ID     INTEGER NOT NULL,
+  PARENT_ID   INTEGER references BOM(item_id),
+  ITEM_NAME   VARCHAR2(20)  NOT NULL,
+  ITEM_QTY    INTEGER, 
+  PRIMARY KEY (ITEM_ID)
 );
             
 

@@ -1,6 +1,5 @@
 package app.mvc.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import app.mvc.dto.BoardDTO;

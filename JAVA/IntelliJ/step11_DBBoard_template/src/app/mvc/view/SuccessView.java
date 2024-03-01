@@ -3,7 +3,6 @@ package app.mvc.view;
 import java.util.List;
 
 import app.mvc.dto.BoardDTO;
-import app.mvc.dto.ReplyDTO;
 
 public class SuccessView {
 
