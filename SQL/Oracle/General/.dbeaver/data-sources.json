@@ -104,7 +104,7 @@
 		"oracle_thin-18df2a6b587-2df0eba78cbeb787": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
-			"name": "ORCL",
+			"name": "KOSINOVATION",
 			"save-password": true,
 			"configuration": {
 				"host": "localhost",
