@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>form 요소 TEST</h1>
+<form action="ex05_img_a.html" name="form" method="get" novalidate>
+    <label FOR="USER-NAME">이름 :</label> <input type="text" name="name" ID="USER-NAME" placeholder="이름 입력" required autofocus readonly><br>
+    <label FOR="USER-NAME">이름 :</label> <input type="text" name="name2" value="hong" disabled>
+    <label for="user-pwd">비밀번호 :</label> <input type="password" name="pwd" id="user-pwd" value="124" size="10">
+
+    <br>
+
+    <fieldset>
+        <legend>취미</legend>
+        <!--        name을 동일하게 만들어서 js의 배열처럼 다룬다    -->
+        <input type="checkbox" value="등산" name="hobby">등산
+        <input type="checkbox" value="낚시" name="hobby">낚시
+        <input type="checkbox" value="수영" name="hobby">수영
+        <input type="checkbox" value="골프" name="hobby">골프
+        <input type="checkbox" value="놀기" name="hobby">놀기
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>성별</legend>
+        <!--        name을 동일하게 만들어야 한다. -->
+        <input type="radio" name="gender" value="man">남자
+        <input type="radio" name="gender" value="woman">여자
+    </fieldset>
+
+    <textarea rows="10" cols="20" name="content">안녕하세요</textarea><br><br>
+
+    직업 :
+    <select name="job" size="3" multiple>
+        <option value="0">--선택--</option>
+        <option value="1">개발자</option>
+        <option value="2" selected>디자이너</option>
+        <option value="3">DBA</option>
+        <option value="4">기획자</option>
+
+
+        <optgroup label="">
+            <option value="2" selected>디자이너</option>
+            <option value="3">DBA</option>
+            <option value="4">기획자</option>
+        </optgroup>
+    </select><br><br>
+
+<!--    HTML5에 추가된 속성들  -->
+    <input type="date" name="birthday">
+    <input type="date" name="birthday2" min="2024-01-23" max="2024-06-28">
+<!--    type : number,range,color,file   -->
+
+sss
+    <br>
+
+    <input type="button" value="클릭">
+    <input type="reset" value="취소">
+    <input type="submit" value="전송">
+    <input type="image" src="images/kosinovation.gif" width="30" height="30">
+    <br><br><br>
+
+    <!--    form 내부 버튼의 기본은 submit  -->
+    <button>btn</button>
+    <button type="button">클릭</button>
+    <button type="reset">취소</button>
+</form>
+</body>
+</html>
