@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <style type="text/css">
+        .container .item{
+            width: 60px;height: 60px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        .container .item.item1{background-color: #E74646;}
+        .container .item.item2{background-color: #FF;}
+        .container .item.item3{background-color: #E74646;}
+        .container .item.item4{background-color: #E74646;}
+        .container .item.item5{background-color: #E74646;}
+        .container .item.item6{background-color: #E74646;}
+        .container .item.item7{background-color: #E74646;}
+        .container .item.item8{background-color: #E74646;}
+        .container .item.item9{background-color: #F7DB6A;}
+        .container .item.item10{background-color: #7149C6;}
+
+        /*
+        flex : item들을 행/열 기준으로 배치
+            1)container에 적용하는 속성값들
+            2)각각의 item에 적용하는 속성값들
+         */
+        .container{
+            height: 100vh;
+            background-color: pink;
+            display: flex; /*기본값 : 가로축*/
+            /*flex-direction: row-reverse;*/
+            /*flex-wrap: wrap;*/
+            flex-flow: row wrap;
+            justify-content: space-around;
+
+            align-items: flex-start;
+            align-content: space-between;
+        }
+    </style>
+</head>
+<body>
+<div class="item item1">1</div>
+<div class="item item2">2</div>
+<div class="item item3">3</div>
+<div class="item item4">4</div>
+<div class="item item5">5</div>
+<div class="item item6">6</div>
+<div class="item item7">7</div>
+<div class="item item8">8</div>
+<div class="item item9">9</div>
+<div class="item item10">10</div>
+</body>
+</html>
