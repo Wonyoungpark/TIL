@@ -1,0 +1,37 @@
+/*밑줄 삭제*/
+ul li a{text-decoration: none}
+
+nav li a:link{
+    color: blue;
+}
+nav li a:visited{
+    color: deepskyblue;
+}
+nav li a:hover{
+    color: pink;
+    text-decoration: underline;
+}
+
+
+/*메뉴바 가로 정렬*/
+#navbar ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar ul li{
+    list-style-type: none;
+    margin: 0px 10px;
+    font-family: "Apple Braille";
+    font-weight: bold;
+}
+
+#navbar ul li.nav-item.logo img{
+    width: 40px; height: 40px;
+}
+
+#navbar{
+    padding: 1px;
+    background-color: bisque;
+}

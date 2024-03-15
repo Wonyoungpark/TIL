@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>연산자의 종류</h1>
+<script type="text/javascript">
+    let i=10;
+    let j="10";
+
+    document.write("<h3>");
+    // ES6 출력: `문자열, 변수`
+    document.write(`i=${i} , type=${typeof i}<br>`);
+    document.write(`i==j : ${i==j}<br>`);
+    document.write(`i===j : ${i===j}<br>`);
+
+    /*
+     * 형변환 : 문자열->숫자
+     * 1)window.parseInt()
+     * 2)Number()
+     * 3)isNan()
+     */
+    document.write("<hr><h4>형변환 --</h4>");
+    let data1 = "a100";
+    document.write(`data1=${data1}, type=${typeof data1}<br>`);
+
+    document.write(`parseInt(data1)=${parseInt(data1)}<br>`);
+    document.write(`Number(data1)=${Number(data1)}<hr>`);
+
+    // data1 = "100a"
+    data1 = "100";
+    document.write(`data1=${data1}, type=${typeof data1}<br>`);
+
+    document.write(`parseInt(data1)=${parseInt(data1)}<br>`);
+    document.write(`Number(data1)=${Number(data1)}<hr>`);
+
+    if(isNaN(data1)){
+        alert("숫자가 아닙니다");
+    }else alert("숫자입니다.");
+
+    let a=10,b="3";
+    document.write(`a+b = ${a+b}<br>`);
+    document.write(`a*b = ${a*b}<br>`);
+
+    document.write("</h3>");
+</script>
+</body>
+</html>

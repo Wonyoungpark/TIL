@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>변수 선언 let과 const</h1>
+<script type="text/javascript">
+    let a;
+    let b=10;
+    let c="희정";
+    d = 3.14;
+
+    document.write("<h3>");
+    document.write("a = "+a+" , "+(typeof a)+"<br>");
+    document.write("b = "+b+" , "+(typeof b)+"<br>");
+    document.write("c = "+c+" , "+(typeof c)+"<br>");
+    document.write("d = "+d+" , "+(typeof d)+"<br>");
+
+    /*
+    let
+    동일한 이름으로 선언 불가
+    선언 전에는 사용 불가능
+    같은 중괄호 내에서만 사용할 수 있다.
+     */
+
+    function test3(){
+        let age=20;
+        {
+            let addr="서울";
+        }
+
+        for(vari=1;i<=10;i++){}
+        console.log("age: "+age);
+        // console.log("addr: "+addr);
+        // console.log("i: "+i);
+    }
+    test3();
+
+    // function test(){
+    //     alert(1);
+    // }
+    // function test(){
+    //     alert(2);
+    // }
+
+    const test = ()=>{
+        alert(1);
+    }
+    test();
+
+    let message;
+    const addr="오리역"; //상수는 반드시 초기화
+
+    message="hi";
+    // addr="seoul"; //상수는 값 변경 불가
+
+    var ename="name";
+    let dname="dname";
+    console.log("window.ename"+window.ename);
+    console.log("window.dname"+window.dname);
+    console.log(dname)
+
+    document.write("</h3>")
+</script>
+</body>
+</html>

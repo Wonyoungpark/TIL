@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        document.write("<h2 style='color:blue'>출력</h2>");
+    </script>
+</head>
+<body>
+    <h1 onmouseover="mouseOver(this)" onmouseout="mouseOut(this)">
+    자바스크립트 시작</h1>
+<h2>internal 방법</h2>
+<script type="text/javascript">
+    document.write("<h4>출력2</h4>");
+
+    function mouseOver(th){
+        console.log("마우스 오버 th="+th);
+        th.style.backgroundColor='red';
+        th.style.color='white';
+    }
+    function mouseOut(th){
+        console.log("마우스 아웃 th="+th)
+        th.style.backgroundColor='black';
+        th.style.color='white';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>JavaScript variable</h1>
+<script type="text/javascript">
+    var a;
+    var b=20;
+    var c='희정';
+    d=3.14;
+
+    document.write("<h3>");
+    document.write("a = "+a+" , "+(typeof a)+"<br>");
+    document.write("b = "+b+" , "+(typeof b)+"<br>");
+    document.write("c = "+c+" , "+(typeof c)+"<br>");
+    document.write("d = "+d+" , "+(typeof d)+"<br>");
+
+    a = new String("안녕");
+    b = "신기하다";
+    c = new Array(1,3,true,"하이",3.5);
+    d = false;
+
+
+    document.write("a = "+a+" , "+(typeof a)+"<br>");
+    document.write("b = "+b+" , "+(typeof b)+"<br>");
+    document.write("c = "+c+" , "+(typeof c)+"<br>");
+    document.write("d = "+d+" , "+(typeof d)+"<br>");
+
+    var a="a";
+    document.write("a = "+a+" , "+(typeof a)+"<br>");
+    document.write("선언 전 name = "+name+" , "+(typeof name)+"<br>");
+    var name="new";
+    document.write("선언 후 name = "+name+" , "+(typeof name)+"<br>");
+
+    test();
+    // function test() {
+    //     alert("aaaaaa")
+    // }
+    // function test(){
+    //     alert("bbbb");
+    // }
+    function test(){
+        alert("test() 함수");
+        var a="지역번수 a";
+        alert(a = +'a');
+        alert("this.a = "+ this.a)
+    }
+    function test2(){
+        alert("테스트 2");
+        alert('a = '+a);
+        alert ('this.a= '+this.a)
+        alert("phone = "+phone)
+    }
+    test();
+    test2();
+
+    function test3(){
+        var age=20;
+        {
+            var addr="서울";
+        }
+
+        for(vari=1;i<=10;i++){}
+        console.log("age: "+age);
+        console.log("addr: "+addr);
+        console.log("i: "+i);
+    }
+    document.write("</h3>");
+</script>
+</body>
+</html>
