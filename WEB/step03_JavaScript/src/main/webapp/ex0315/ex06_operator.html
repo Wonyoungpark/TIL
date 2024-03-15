@@ -44,6 +44,23 @@
     document.write(`a+b = ${a+b}<br>`);
     document.write(`a*b = ${a*b}<br>`);
 
+    /*
+    1) alert()
+    2) prompt()
+    3) confirm()
+     */
+
+    // window.prompt("이름은?","길동");
+    // window.prompt("나이는?");
+    // window.prompt("주소는?","서울",100);
+    let age = window.prompt("나이?",20); //input값은 string
+    document.write(`나이는 ${age-1}<br>`);
+    document.write(`나이는 ${age+1}<br>`);
+    document.write(`나이는 ${parseInt(age)+1}<br>`);
+
+    let result = confirm("삭제하시겠습니까?");
+    document.write(`결과 = ${result}`);
+    
     document.write("</h3>");
 </script>
 </body>
