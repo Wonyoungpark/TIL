@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //함수를 변수에 할당
+    const test = function(name){
+        name ? console.log(`이름은 ${name}입니다.`) : console.log(`이름이 없습니다.`);
+        return 5;
+    };
+    const test2 = function (name,age){
+        console.log(`이름은 ${name}이고 나이는 ${age}입니다.`);
+        return "ok";
+    };
+
+    //함수 호출
+    // test("길동");
+    // test();
+
+    let result = test2("나영",30);
+    console.log("결과 = "+result);
+
+    console.log(`${typeof test}`);
+    console.log(`${typeof test()}`);
+</script>
+</body>
+</html>

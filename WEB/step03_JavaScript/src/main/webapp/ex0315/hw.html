@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS HW</title>
+
+    <script type="text/javascript">
+        // let num = window.prompt("별 반복 횟수 입력");
+        // let star = parseInt(num);
+        // for(let i=star;i>0;i--){
+        //     document.write("⭐️".repeat(i)+"<br>");
+        // }
+
+
+        // document.write('<table border>');
+        //
+        // document.write('<tr>');
+        // for(let i=2;i<10;i++) document.write(`<th>${i}단</th>`);
+        // document.write('</tr>');
+        //
+        // for(let i=1;i<10;i++){
+        //     document.write('<tr>');
+        //     for(let j=2;j<10;j++) document.write(`<td>${j} * ${i} = ${i*j}</td>`);
+        //     document.write('</tr>');
+        // }
+        //
+        // document.write('</table>');
+
+
+        document.write('<h1 style="text-align: center">성적표</h1>');
+        let name = window.prompt("이름");
+        let kor = parseInt(window.prompt("국어 점수"));
+        let eng = parseInt(window.prompt("영어 점수"));
+        let math = parseInt(window.prompt("수학 점수"));
+
+        let sum = kor+eng+math;
+        let avg = Math.round(sum/3);
+
+        let rank;
+        if(avg>=90) rank='수';
+        else if(avg>=80) rank='우';
+        else if(avg>=70) rank='미';
+        else if(avg>=60) rank='양';
+        else rank='가';
+
+        document.write('<center><table border="1" bordercolor="green" width="500px" style="text-align: center">');
+
+        document.write('<tr>');
+        document.write(`<th>이름</th>`);
+        document.write(`<th>국어</th>`);
+        document.write(`<th>영어</th>`);
+        document.write(`<th>수학</th>`);
+        document.write(`<th>총점</th>`);
+        document.write(`<th>평균</th>`);
+        document.write(`<th>등급</th>`);
+        document.write('</tr>');
+
+        document.write('<tr>');
+        document.write(`<td>${name}</td>`);
+        document.write(`<td>${kor}</td>`);
+        document.write(`<td>${eng}</td>`);
+        document.write(`<td>${math}</td>`);
+        document.write(`<td>${sum}</td>`);
+        document.write(`<td>${avg}</td>`);
+        document.write(`<td>${rank}</td>`);
+        document.write('</tr>');
+
+        document.write('</table></center>');
+
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function test() {
+            alert("test() 호출");
+        }
+        function test2(th){//this 전달
+            th.style.border="double red 3px";
+        }
+
+        function test3(){
+            // document.getElementById(id); //중복 불가
+
+            // document.getElementsByClassName();
+            // document.getElementsByName();
+            // document.getElementsByTagName();
+            //
+            // document.querySelector(selectors);
+            // document.querySelectorAll(selectors);
+
+            let nodeH3 = document.querySelector("h3");
+            // alert(nodeH3);
+            nodeH3.style.backgroundColor="red";
+            nodeH3.style.color="white";
+        }
+
+        function test4(){
+            let btnAll = document.querySelectorAll("button");
+            // document.querySelectorAll("[onclick]");
+            for(let i=0;i<btnAll.length;i++){
+                btnAll[i].style.fontSize="30px";
+                btnAll[i].style.backgroundColor="pink";
+            }
+        }
+    </script>
+</head>
+<body>
+<h3>이벤트 등록</h3>
+<button onclick="test()">클릭1</button>
+<button onclick="test2(this)">클릭2</button>
+<button onclick="test3()">클릭3</button>
+<button onclick="test4()">클릭4</button>
+</body>
+</html>

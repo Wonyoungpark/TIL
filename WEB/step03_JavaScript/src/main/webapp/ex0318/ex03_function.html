@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>callback 함수</h3>
+<!--
+callback() : 매개변수로 함수를 전달하는 것
+-->
+<script type="text/javascript">
+  function add(a,b){
+      return a+b;
+  }
+  function minus(a,b){
+      return a-b;
+  }
+  // function print(a,b,operator){
+  //     if(operator==="+") add(a,b);
+  // }
+
+  const print = function(a,b,operator){ //operator에 함수 전달 => callback()
+      let result = operator(a,b); //함수 호출
+      console.log("결과 = "+result);
+  }
+
+  // 함수 호출
+  print(5,3,add);
+  print(5,3,minus);
+  print(5,3,function (a,b){return a/b;});
+
+</script>
+</body>
+</html>

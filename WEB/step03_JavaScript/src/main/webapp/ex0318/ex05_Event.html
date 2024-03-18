@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function test() {
+            alert("test() 호출");
+        }
+
+        function test2(event) {
+            //event 발생 객체(주체) 찾기
+            console.log(event);
+
+            event.target.style.border = "double red 3px";
+        }
+
+        function test3() {
+            // document.getElementById(id); //중복 불가
+
+            // document.getElementsByClassName();
+            // document.getElementsByName();
+            // document.getElementsByTagName();
+            //
+            // document.querySelector(selectors);
+            // document.querySelectorAll(selectors);
+
+            let nodeH3 = document.querySelector("h3");
+            // alert(nodeH3);
+            nodeH3.style.backgroundColor = "red";
+            nodeH3.style.color = "white";
+        }
+
+        function test4() {
+            let btnAll = document.querySelectorAll("button");
+            // document.querySelectorAll("[onclick]");
+            for (let i = 0; i < btnAll.length; i++) {
+                btnAll[i].style.fontSize = "30px";
+                btnAll[i].style.backgroundColor = "pink";
+            }
+        }
+
+        //문서 로딩 후, 이벤트 등록
+        // onload = test;
+        onload = function () {
+            // 이벤트 등록
+            let btnEle1 = document.getElementById("btn1");
+            btnEle1.onclick=test;
+
+            document.getElementById("btn2").onclick=test2;
+
+            document.querySelector("#btn3").onclick=test3;
+            document.querySelector("#btn4").onclick=test4;
+
+        }
+    </script>
+</head>
+<body>
+<h3>이벤트 등록</h3>
+<button id="btn1">클릭1</button>
+<button id="btn2">클릭2</button>
+<button id="btn3">클릭3</button>
+<button id="btn4">클릭4</button>
+</body>
+</html>
