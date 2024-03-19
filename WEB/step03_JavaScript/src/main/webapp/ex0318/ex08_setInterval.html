@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        onload = function (){
+            document.getElementById("start").onclick=()=>{
+                a = setInterval(function (){
+                    console.log(1);
+                },1000);
+            };
+            document.getElementById("stop").onclick=()=>{
+                clearInterval(a);//중지
+            };
+        };
+    </script>
+</head>
+<body>
+<button id="start">시작</button>
+<button id="stop">중지</button>
+</body>
+</html>

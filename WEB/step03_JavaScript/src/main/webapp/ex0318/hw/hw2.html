@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    arr = ["red","green","blue","orange"];
+
+    onload = function (){
+        setInterval(function (){
+            let rand = Math.floor(Math.random()*3);
+            console.log(rand);
+            document.body.style.backgroundColor=arr[rand];
+        },1000);
+    };
+</script>
+
+</body>
+</html>

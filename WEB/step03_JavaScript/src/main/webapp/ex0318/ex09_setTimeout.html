@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function repeat(){
+            console.log(1);
+            a = setTimeout(repeat,1000);
+        }
+        onload = function (){
+            document.getElementById("start").onclick=()=>{
+                repeat();
+            };
+            document.getElementById("stop").onclick=()=>{
+                clearTimeout(a);//중지
+            };
+        };
+    </script>
+</head>
+<body>
+<button id="start">시작</button>
+<button id="stop">중지</button>
+</body>
+</html>

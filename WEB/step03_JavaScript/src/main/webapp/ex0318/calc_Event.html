@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #calc{
+            padding: 10px;
+        }
+        div{
+            width: 300px; height: 200px; border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<script>
+    onload = function calculate(){
+        document.getElementById("calc").onclick=function(){
+            let a = window.prompt("숫자 a");
+            let b = window.prompt("숫자 b");
+            let op = window.prompt("연산기호를 입력하세요");
+            let result;
+
+            if(isNaN(a)||isNaN(b)){
+                alert("숫자만 입력하세요");
+                confirm("다시 하시겠습니까?") ? calculate() : alert("다음에 이용해주세요");
+            } else {
+
+                if (op === "+") result = parseInt(a) + parseInt(b);
+                else if (op === "-") result = parseInt(a) - parseInt(b);
+                else if (op === "*") result = parseInt(a) * parseInt(b);
+                else if (op === "/") result = parseInt(a) / parseInt(b);
+                else {
+                    window.alert("연산 기호를 잘못 입력하셨습니다.");
+                    confirm("다시 하시겠습니까?") ? calculate() : alert("다음에 이용해주세요");
+                }
+                document.querySelector("div").innerHTML=`<h3>${a} ${op} ${b} = ${result}</h3>`;
+            }
+        }
+    }
+
+</script>
+<button id="calc">연산하기</button>
+<div></div>
+</body>
+</html>
