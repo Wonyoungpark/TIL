@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>String</h3>
+<script type="text/javascript">
+    let str = "abcd abcd abcd";
+    let str2 = new String("abcd abcd abcd");
+
+    document.write("<h4>");
+    document.write(`str = ${str}<br>`);
+    document.write(`str2 = ${str2}<br>`);
+
+    document.write(`str==str2 ${str==str2}<br>`);
+    document.write(`str===str2 ${str===str2}<br>`);
+
+    document.write(`str.charAt(0) ${str.charAt(0)}<br>`);
+    document.write(`str.charAt(7) ${str.charAt(7)}<br>`);
+    document.write(`str.charAt(20) ${str.charAt(20)}<br>`);
+
+    document.write(`str.indexOf('c') = ${str.indexOf('c')}<br>`);
+    document.write(`str.indexOf('bc') = ${str.indexOf('bc')}<br>`);
+    document.write(`str.indexOf('f') = ${str.indexOf('f')}<br>`);
+    document.write(`str.indexOf('c',4) = ${str.indexOf('c',4)}<br>`);
+
+    document.write(`str.lastIndexOf('c') = ${str.lastIndexOf('c')}<br>`);
+    document.write(`str.lastIndexOf('bc') = ${str.lastIndexOf('bc')}<br>`);
+    document.write(`str.lastIndexOf('f') = ${str.lastIndexOf('f')}<br>`);
+
+    document.write(`str.length = ${str.length}<br>`);
+    document.write(`str.substring(0,3) = ${str.substring(0,3)}<br>`);
+    document.write(`str.substring(2,2) = ${str.substring(2,2)}<br>`);
+    document.write(`str.substring(2,3) = ${str.substring(2,3)}<br>`);
+    document.write(`str.substring(6) = ${str.substring(6)}<br>`);
+
+    let result = str.split(" ")
+
+    document.write("</h4>");
+</script>
+</body>
+</html>

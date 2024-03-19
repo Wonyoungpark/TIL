@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        onload=function (){
+
+            document.querySelector("[value='시작']").onclick=()=>{
+
+                const today = new Date();
+                console.log(today);
+                let hour = today.getHours()>=12 ? "PM "+today.getHours() : "AM "+today.getHours();
+                let time = hour +" : "+today.getMinutes()+" : "+today.getSeconds();
+
+                document.getElementById("text").value=time;
+            }
+
+            document.querySelector("[value='중지']").onclick=()=>{
+
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="text" name="text" id="text">
+<input type="button" name="start" id="start" value="시작">
+<input type="button" name="stop" id="stop" value="중지">
+<div id="clock"></div>
+</body>
+</html>

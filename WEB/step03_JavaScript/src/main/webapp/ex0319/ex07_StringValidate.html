@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <script type="text/javascript">
+        onload = function () {
+            document.querySelector("[name='id']").onblur = () => {
+                // console.log(this.value);//this: document.querySelector("[name='id']")
+                // console.log(event.target.value);
+                const v = event.target.value;
+
+                for (let i = 0; i < v.length; i++) {
+                    let ch = v.charAt(i);
+                    if (ch < "A" || ch > "Z") {
+                        document.getElementById("idSpan").innerHTML = "<strong style='color: red'>영문만 입력하세요.</strong>";
+                        event.target.value = "";
+                        return;
+                    }
+                }
+
+                //특수문자 제한
+                const data = "7894561230qwertyuiopasdfghjklzxcvbnm@!%*";
+                const v2 = event.target.value;
+
+                for (let i = 0; i < v2.length; i++) {
+                    let ch = v2.charAt(i);
+                    if (data.indexOf(ch) === -1) {
+                        document.getElementById("idSpan").innerHTML = "<strong style='color:red'>id에 영문 소문자, 숫자, 특수문자(@!%*)만 입력하세요.";
+                        event.target.value = "";
+                        return;
+                    }
+                }
+                document.getElementById("idSpan").innerHTML = "";
+            };
+
+            document.querySelector("[name=age]").onblur = function () {
+                if (!numberCheck(this)) document.getElementById("ageSpan").innerHTML = "<strong style='color:red'>숫자만 입력하세요.</strong>";
+            };
+
+            function numberCheck(obj) {
+                if (isNaN(obj.value)) {
+                    obj.nextSibling.innerHTML = "<strong style='color:red'>숫자만 입력하세요.</strong>";
+                    obj.value = "";
+                    obj.focus();
+                    return false;
+                } else {
+                    obj.nextSibling.innerHTML = "";
+                    return true;
+                }
+            }
+
+
+            document.querySelector("[name=jumin1]").onkeyup = function () {
+                let ch = this.value.charAt(this.value.length - 1);
+                if (isNaN(ch)) {
+                    alert("숫자만 입력하세요.");
+                    this.value = this.value.substr(0, this.value.length - 1);
+                    this.focus();
+                    return;
+                }
+                if (this.value.length === 6) {
+                    document.querySelector("[name=jumin2]").focus();
+                }
+            };
+
+
+            document.querySelector("[name=jumin2]").onblur = function () {
+                if (numberCheck(this)) {
+                    let ch = this.value.charAt(0)
+                    const gend = document.querySelectorAll("[name=gender]");
+                    if (ch === "1" || ch === "3") gend[0].checked = true;
+                    else gend[1].checked = true;
+                }
+            };
+
+
+            document.querySelector("[name=email]").onblur=function (){
+              if(this.value.indexOf("@")===-1) {
+                  this.nextSibling.innerHTML="<b>@를 포함한 올바른 이메일 형식으로 입력해주세요.</b>";
+                  this.value="";
+                  this.focus();
+              }else this.nextSibling.innerHTML="";
+            };
+        };
+    </script>
+
+
+</head>
+<body>
+<form name="form">
+    ID : <input type="text" name="id"><span id="idSpan"></span>
+    <p>
+        age : <input type="text" name="age"><span></span>
+    <p>
+        email : <input type="text" name="email"><span></span>
+    <p>
+
+    <fieldset>
+        <legend>주민번호</legend>
+        <input type="text" size="6" name="jumin1"> -
+        <input type="text" size="7" name="jumin2"><span></span>
+        <p>
+
+            성별 :
+            <input type="radio" name="gender" value="남자">남자
+            <input type="radio" name="gender" value="여자">여자
+
+    </fieldset>
+
+
+</form>
+
+</body>
+</html>

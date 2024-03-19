@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        onload=function (){
+            const today = new Date();
+            document.f.eY.value=today.getFullYear();
+            document.f.eM.value=today.getMonth();
+            document.f.eD.value=today.getDay();
+
+            document.querySelector("[value='계산']").onclick = ()=>{
+                const start = new Date(document.getElementById("stY").value,document.getElementById("stM").value-1,document.getElementById("stD").value);
+                const end = new Date(document.getElementById("eY").value,document.getElementById("eM").value-1,document.getElementById("eD").value);
+                let diff = Math.ceil((end.getTime()-start.getTime()) / (1000 * 60 * 60 * 24));
+                alert(diff+"일 지났습니다.");
+            }
+        }
+    </script>
+</head>
+<body>
+<form name="f">
+    <input type="text" size="4" name="stY" id="stY">년
+    <input type="text" size="2" name="stM" id="stM">월
+    <input type="text" size="2" name="stD" id="stD">일
+
+    <input type="text" size="4" name="eY" id="eY">년
+    <input type="text" size="2" name="eM" id="eM">월
+    <input type="text" size="2" name="eD" id="eD">일
+
+    <input type="button" value="계산">
+</form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        input[type=text]{
+            width: 400px; font-size: 20px; border: red solid 2px;
+        }
+    </style>
+    <script type="text/javascript">
+        let arr = ["오","늘","은"," ","화","요","일","!"," ","내","일","은"," ","쉰","다"];
+        let idx=0;
+        function repeat(){
+            if(idx<arr.length) {
+                document.f.text.value+=arr[idx];
+                idx++;
+            }
+            setTimeout(repeat,1000);
+        }
+
+        onload = function (){
+            document.querySelector("[value='시작']").onclick=()=>{
+                // repeat();
+
+                if(idx===0){
+                    let inputEle = document.getElementById("text");
+                    inputEle.value="";
+                    let st = setInterval(function(){
+                        inputEle.value += arr[idx++];
+                        if(idx===arr.length){
+                            idx=0;
+                            clearInterval(st);
+                        }
+                    },500)
+                }else alert("현재 진행 중입니다.");
+            };
+
+        };
+    </script>
+</head>
+<body>
+<form name="f">
+    <input type="text" name="text" id="text">
+    <input type="button" value="시작">
+</form>
+</body>
+</html>
