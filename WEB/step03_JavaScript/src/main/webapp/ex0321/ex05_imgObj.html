@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> New Document </title>
+
+    <script type="text/javascript">
+        onload=()=>{
+            document.querySelectorAll(".sp1").forEach((item)=>{
+                item.onclick=()=>{
+                    //js에서 body요소 Img 객체 접근 방법
+                    // 1)document.images[index].속성/함수
+                    // 2)document.image명.속성/함수이름
+                    // 3)document.getElementById("아이디").속성/메소드이름
+
+                    let imgIndex = event.target.getAttribute("data-img-index");
+                    let str="";
+                    str+= "src "+document.images[imgIndex].src+"\n";
+                    str+= "name "+document.images[imgIndex].name+"\n";
+                    str+= "width "+document.images[imgIndex].width+"\n";
+                    str+= "height "+document.images[imgIndex].height+"\n";
+                    str+= "alt "+document.images[imgIndex].alt+"\n";
+                    str+= "border "+document.images[imgIndex].border+"\n";
+
+                    document.images[imgIndex].src="img/monkey.gif"; //이미지 경로 변경
+                }
+            })
+        };
+    </script>
+
+</head>
+
+<body>
+<h1> img 객체</h1>
+
+<img src="img/cat.gif" name="cat" width="100" height="80"
+     alt="고양이그림"/>
+
+<img src="img/dog.gif" name="dog" width="70" height="60"
+     alt="강아지그림" border="10"/>
+
+<hr>
+<span class="sp1" data-img-index="0">[고양이 정보]</span>
+<span class="sp1" data-img-index="1">[강아지 정보]</span>
+<hr>
+
+<span>[고양이 정보]</span>
+<span>[강아지 정보]</span>
+
+<hr>
+
+<span onclick="imgInfo3(cat)">[고양이 정보]</span>
+<span onclick="imgInfo3(dog)">[강아지 정보 - dog]</span>
+
+
+
+
+
+</body>
+</html>

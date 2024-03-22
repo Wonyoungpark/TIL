@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript">
+
+        var row = Math.ceil((col+end_day[month])/7);
+        var day = 1;
+        var startRow = 0;
+        colDate = ["일","월","화","수","목","금","토"];
+
+        document.write("<table align='center'>");
+        document.write("<tr><th colspan='7'"+year+"년 "+(month+1)+"월 </th></tr>");
+
+        document.write("<tr>");
+        for(c=0;c<7;c++) document.write("<th>"+colDate[c]+"요일</th>");
+        document.write("</tr>");
+
+        for (i = 0; i < 7; i++) {
+            document.write("<tr>")
+            for (j = 0; j < 7; j++) {
+                if (j == 0 || day == date) document.write("<td style='color: red'>");
+                else document.write("<td>");
+
+                if (startRow < col) {
+                    document.write("⭐️</td>");
+                    startRow++;
+                } else if (day > end_day[month]) document.write("※</td>");
+                else if (day == date) document.write("" + day++ + "<br><span id='span></td>'");
+                else document.write(day++ + "</td>");
+            }
+            document.write("</tr>");
+        }
+        document.write("</table>");
+
+        onload = function () {
+            setInterval(function () {
+                let today = new Date();
+                let h = today.getHours();
+                let m = today.getMinutes();
+                let s = today.getSeconds();
+
+                let str = "AM";
+                if (h > 12) {
+                    str = "PM";
+                    h -= 12;
+                }
+
+                if (h < 10) h = "0" + h;
+                if (m < 10) m = "0" + m;
+                if (s < 10) s = "0" + s;
+
+                document.getElementById("span").innerText = str + " " + h + " " + m + " " + s;
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
