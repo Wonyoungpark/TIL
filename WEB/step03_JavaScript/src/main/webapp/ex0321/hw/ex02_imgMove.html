@@ -1,0 +1,63 @@
+<!DOCTYPE HTML >
+<html>
+<head>
+    <title> New Document </title>
+    <meta charset="utf-8">
+
+    <!--    반드시 position 설정을 줘야 이미지가 움직인다.-->
+    <style>
+        img {
+            position: absolute;
+        }
+    </style>
+
+    <script>
+        onload = () => {
+            let i = 0;
+            let state = true;
+            let btnClickState = true;
+
+            function imgMoveState() {
+                if(btnClickState){
+                    st = setInterval(imgMove, 10);
+                    btnClickState=false;
+                }else alert("이미 실행 중입니다.");
+            }
+
+            function imgMove() {
+                if (i < 0) {
+                    state = true;
+                    document.getElementById("img").src = "img/lion.gif";
+                } else if (i > 300) {
+                    state = false;
+                    document.getElementById("img").src = "img/monkey.gif";
+                }
+
+                if (state) i++;
+                else i--;
+
+                console.log(state + " = " + i);
+                document.getElementById("img").style.left = i + "px";
+            }
+
+            function imgStopState() {
+                clearInterval(st);
+                btnClickState = true;
+            }
+
+            document.getElementById("move").onclick = imgMoveState;
+            document.getElementById("stop").onclick = imgStopState;
+        }
+    </script>
+
+</head>
+
+<body>
+<form>
+    <input type="button" value="레이어움직이기" id="move"/>
+    <input type="button" value="레이어멈추기" id="stop"/>
+</form>
+<p>
+    <img src="img/dog.gif" id="img"/>
+</body>
+</html>

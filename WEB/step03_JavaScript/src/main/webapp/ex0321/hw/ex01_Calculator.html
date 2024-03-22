@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var arr = [
+            ["7", "8", "9", "*"],
+            ["4", "5", "6", "/"],
+            ["1", "2", "3", "+"],
+            ["0", "=", ".", "-"],
+            ["지우기", "<--"]
+        ];
+
+        onload = () => {
+            document.write("<div style='text-align:center;'><h1>계산기</h1></div>");
+            document.write("<div style='text-align:center;'></div>");
+
+            document.write("<form name='f;>"); //reset 기능을 위해 form 필요
+
+            //onload 이후 속성은 style 속성 적용이 안되기 때문에 이너로 적용
+            document.write("<input type='text' name'inText' id='inText' style='width:23px;height:40px;margin:5px;text-align:right;'><br>");
+            var arrLength = arr.length;
+
+            for (i = 0; i < arrLength; i++) {
+                var subArrLength = arr[i].length;
+                for (j = 0; j < subArrLength; j++) document.write("<input type='button' value=" + arr[i][j] + " id=" + arr[i][j] + " style='width:50px;height:50px;margin:5px;'>");
+                document.write("<br>");
+            }
+
+            document.getElementById(arr[4][0]).setAttribute("style","width:170px;height:50px;margin:5px;");
+            document.getElementById(arr[4][0]).setAttribute("type","reset");
+
+            document.write("</form>");
+            document.write("</div>");
+
+            //기능 구현
+            document.getElementById("=").onclick=()=>{
+                document.getElementById("inText").value = new Function("return"+document.getElementById("inText").value)();
+            };
+
+            document.getElementById("<--").onclick=()=>{
+                let input = document.getElementById("inText");
+                let str = input.value;
+                input.value = str.substring(0, str.length-1);
+            };
+
+            document.querySelectorAll("[type=button]:not([value='=']),[value='<--']").forEach((item)=>{
+                item.onclick=()=>{
+                    console.log(item.value);
+                    document.getElementById("inText").value += item.value;
+                };
+            });
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

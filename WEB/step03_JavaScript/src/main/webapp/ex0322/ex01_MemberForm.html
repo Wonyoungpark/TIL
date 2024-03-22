@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>New Web Project</title>
+    <style type="text/css">
+        tr th{background-color:pink}
+        td,th{padding:3px}
+    </style>
+
+    <script type="text/javascript">
+        onload=()=>{
+            document.querySelector("[value=IDCheck]").onclick=()=>{
+                //id 입력 유무 체크
+                let idE = document.getElementById("id");
+                if(idE.value===""){
+                    alert("아이디를 입력해주세요.");
+                    idE.focus();
+                    return;
+                }
+
+                //입력받은 id를 ex01_idCheck.html로 전송 (get/post)
+                //post는 form으로만 가능
+                window.open("ex01_idCheck.html?id"+idE.value,"idwin","width=400,height=300");
+            };
+
+            //우편번호 검색
+            document.getElementById("zip").onclick=()=>{
+                window.open("ex01_zipCheck.html","zipwin","width=400,height=300");
+            };
+        };
+    </script>
+
+</head>
+<body>
+<h1>[ 회원 가입 ]</h1>
+<form name="member">
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>
+                <input type="text" name="id" id="id"/>
+                <input type="button" value="IDCheck" onclick="idCkOpen()" />
+            </td>
+        </tr>
+        <tr>
+            <th>우편번호</th>
+            <td>
+                <input type="text" name="zip1" size="3" /> -
+                <input type="text" name="zip2" size="3" />
+                <input type="button" value="우편번호검색" onclick="zipCheck()" id="zip"/>
+            </td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td><input type="text" size="30" name="addr" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

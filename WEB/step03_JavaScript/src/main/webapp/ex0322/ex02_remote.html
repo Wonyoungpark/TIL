@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="EUC-KR">
+    <title>Insert title here</title>
+
+    <script type="text/javascript">
+        onload = () => {
+            document.querySelectorAll("a").forEach((item) => {
+                item.onclick=()=>{
+                    // opener.location.href="https://www.naver.com"; //주소 변경
+                    opener.location.href = item.getAttribute("data-url");
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+<a href="#" data-url="https://www.naver.com">네이버</a>
+<p>
+    <a href="#" data-url="https://www.daum.net">다음</a>
+<p>
+    <a href="#" data-url="https://www.kosta.or.kr">코스타</a>
+<p>
+</body>
+</html>

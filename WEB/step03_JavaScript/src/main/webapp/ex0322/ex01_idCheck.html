@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>New Web Project</title>
+
+    <script type="text/javascript">
+        onload = () => {
+            document.getElementById("btn").onclick = () => {
+                //id를 부모창에 전달
+                opener.document.f.id.value = document.f.id.value; //opener : 부모창
+
+                //창 닫기
+                // opener.close(); //부모창 닫기
+                self.close(); //현재창 닫기
+            };
+        };
+    </script>
+
+</head>
+<body>
+<form name="f">
+    <table>
+        <tr>
+            <th colspan="2" bgcolor="yellow"> ID 중복 체크</th>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <td>
+                <input type="text" name="id"/>
+                <input type="button" value="사용하기" onclick="idResult()" id="btn"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

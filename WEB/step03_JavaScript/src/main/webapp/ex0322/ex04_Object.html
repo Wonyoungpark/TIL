@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Object 생성</h2>
+<script type="text/javascript">
+    //JS 객체 : {}    // []:배열
+    const Emp = {
+        empno: 10,
+        ename: "gildong",
+        job: "teacher",
+        message: function () {
+            return "hello";
+        },
+        dept: {
+            dname: "IT",
+            deptno: 100
+        }
+    };
+
+    document.write(`<h3>`);
+    document.write(`emp = ${Emp} / ${Emp.empno} / ${Emp.ename} / ${Emp['job']} <br>`);
+    console.log(Emp)
+
+    const result = Emp.message();
+    console.log("result = " + result);
+
+    console.log(Emp.dept.dname);
+
+    //for-in으로 key(property)-value 찾기
+    for (let property in Emp) {
+        console.log(property + " = " + Emp[property]);
+    }
+
+    console.log("Emp.dept");
+    for (let key in Emp.dept) {
+        console.log(key + " = " + Emp.dept[key]);
+    }
+
+    const arr = ["A", "B", "C"]
+    for (let i in arr) console.log(i); //array index 출력
+    document.write(`</h3>`);
+
+    let name = "name";
+    let age = 20;
+    let addr = "서울";
+
+    // const student = {
+    //     name:name,
+    //     age:age,
+    //     addr:addr
+    // }
+    const student = {
+        name,
+        age,
+        addr
+    }
+    console.log(student.name+" | "+student.age+" | "+student['addr']);
+</script>
+</body>
+</html>

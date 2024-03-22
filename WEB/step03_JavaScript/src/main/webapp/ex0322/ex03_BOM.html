@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<h1> BOM 알아보자 </h1>
+<script type="text/javascript">
+    //Java에서 클래스 생성
+    // class Student{
+    //     name="d"
+    //     age=10
+    //     no=1
+    //
+    //     public void print(){}
+    // }
+
+    //JavaScriptd에서 함수 생성
+    const Student = {
+        name:"길동",
+        age:10,
+        no:1,
+        print:function (){}
+    }
+    // const window = {
+    //     open:function (){},
+    //     alert:function (){}
+    // }
+
+    document.write("<h3>window 객체 </h3>");
+    //in은 객체 내의 정보를 꺼낼 때 사용하는 키워드
+    for(let key  in window){
+        document.write(`${key} = ${window[key]} <br>`);
+    }
+
+    document.write("<hr color='red'>");
+
+    document.write("<h3>location 객체 </h3>");
+    for(let key  in location){
+        document.write(`${key} = ${location[key]} <br>`);
+    }
+
+    document.write("<hr color='red'>");
+
+    document.write("<h3>history 객체 </h3>");
+    for(let key  in history){
+        document.write(`${key} = ${history[key]} <br>`);
+    }
+
+    document.write("<hr color='red'>");
+
+    document.write("<h3>screen 객체 </h3>");
+    for(let key  in screen){
+        document.write(`${key} = ${screen[key]} <br>`);
+    }
+
+    document.write("<hr color='red'>");
+
+    document.write("<h3>naviagtor 객체 </h3>");
+
+    for(let key  in navigator){
+        document.write(`${key} = ${navigator[key]} <br>`);
+    }
+
+    document.write("<hr color='red'>");
+
+
+    alert("history.length = " + history.length)
+
+</script>
+
+<form>
+    <input type="button" value="back()" onclick="history.back()">
+    <input type="button" value="forward()" onclick="history.forward()">
+    <input type="button" value="go(2)" onclick="history.go(2)">
+    <input type="button" value="go(-2)" onclick="history.go(-2)">
+
+    <p>
+        <input type="button" value="location.href" onclick="location.href='http://www.naver.com'">
+        <input type="button" value="location.reload()" onclick="location.reload()">
+        <input type="button" value="location.replace()" onclick="location.replace('http://www.naver.com')">
+<!--    replace는 href와 다르게 history가 남지 않는다. -->
+</form>
+
+</body>
+</html>
