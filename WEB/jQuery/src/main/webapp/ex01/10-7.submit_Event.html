@@ -1,0 +1,53 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#form").submit(function () {
+                //id&pwd 값 체크
+                let id = $("#id").val();
+                let pwd = $("#pwd").val();
+                if (id === "") {
+                    alert("아이디를 입력하세요.");
+                    $("#id").focus();
+                    return false; //전송 중지 // 이동을 막는다.
+                }
+                if (pwd === "") {
+                    alert("비밀번호를 입력하세요.");
+                    $("#pwd").focus();
+                    return false; //전송 중지 // 이동을 막는다.
+                }
+                alert("로그인 시도");
+            });
+
+            //    reset
+            $(":reset").click(function () {
+                alert("모든 데이터를 초기화합니다.");
+                $("#id").focus();
+            })
+        });
+    </script>
+
+</head>
+<body>
+<h1>submit 이벤트</h1>
+
+<form id="form" name="form" action="http://www.daum.net">
+    아이디 : <input type="text" id="id" name="id"/> <br>
+    비밀번호 : <input type="text" id="pwd" name="pwd"/> <br>
+    <input type="submit" value="로그인"/>
+    <input type="reset" value="취소"/>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+

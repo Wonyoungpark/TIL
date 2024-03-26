@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script src="../js/jquery-3.6.1.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            <!--        id 찾기-->
+            $("#tag").css({color: "red", fontStyle: "italic"});
+
+            //     class 찾기
+            $(".div").css("border", "double blue 5px");
+
+            //     하위 element 찾기
+            $("div ol li").css("color", "red");
+            $("div ol li:eq(0)").css("color", "red");
+            $("div ol li:gt(2)").css("color", "red");
+            $("div ol li:lt(1)").css("color", "red");
+            $("div ol li:even").css("color", "red"); //0부터 시작
+            $("div ol li:odd").css("color", "red");
+            $("div ol li:first").css("color", "red");
+            $("div ol li:last").css("color", "red");
+            $("div ol li:not(:last)").css("color", "red");
+        });
+    </script>
+
+</head>
+<body>
+
+<h3>jQuery 기본 selector</h3>
+<h4>웹 프로그래밍</h4>
+<div class="div">
+    <ol>
+        <li>jsp</li>
+        <li id="tag">javaScript</li>
+        <li>jQuery</li>
+        <li>Ajax</li>
+    </ol>
+</div>
+
+
+</body>
+</html>

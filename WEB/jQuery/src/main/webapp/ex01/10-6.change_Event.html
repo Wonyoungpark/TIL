@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+           //selectbox에 change EVENT
+            $("[name=job]").change(function (){
+                //선택된 값 조회
+                alert(this.value);
+                alert($(this).val());
+
+            //     선택된 index => selectedIndex //js문법
+                alert(this.selectedIndex);
+
+                //선택된 index&value를 div 영역에 추가
+                let str = "당신의 직업은 " + $(this).val() +"입니다. ("+this.selectedIndex+"번)<br>";
+                $("#result").html($("#result").html()+str);
+            });
+        });
+    </script>
+
+</head>
+<body>
+<h1>change 이벤트</h1>
+
+<form>
+    <select name="job">
+        <option value="0">--직업 선택--</option>
+        <option value="회사원">회사원</option>
+        <option value="개발자">개발자</option>
+        <option value="전문직">전문직</option>
+        <option value="회계사">회계사</option>
+        <option value="의사">의사</option>
+    </select>
+</form>
+
+<div id="result"></div>
+
+</body>
+</html>
+
+
+
+
+
+
