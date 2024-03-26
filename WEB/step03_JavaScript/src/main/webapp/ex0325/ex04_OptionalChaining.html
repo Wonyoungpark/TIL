@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>Optional Chanining - ?. </h3>
+<!-- 
+   중첩된 객체에서 존재하지 않는 특정 속성=property를 조회할대
+   오류없이 undefined 반환하고 그냥 넘어 갈수 있도록 하는것
+ -->
+ <script type="text/javascript">
+   const person1 = {
+		name:"hee",
+		job : {
+			title:"teacher",
+			manager :{
+				name:"chan"
+			}
+		}
+   }  
+   
+   const person2 = {
+	   name:"jang",	
+   }
+   
+   //함수
+   function print(person){
+	   //메니져의 이름을 알고싶다.
+	   //console.log(person.job.manager.name);//속성이없으면 오류발생 
+	   /*if(person){
+		   if(person.job){
+			   if(person.job.manager){
+				   console.log(person.job.manager.name)
+			   }
+		   }
+	   }*/
+	   
+	   // && 와 || 특징 이용
+	  /*const re =  person && person.job && person.job.manager && person.job.manager.name;
+	  console.log(re);*/
+	  
+	  //Optional Chanining 변경
+	  const re = person?.job?.manager?.name;
+	  console.log(re);
+	   
+   }
+   
+   //함수호출해보자
+   //print(person1);
+   print(person2);
+   
+ </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

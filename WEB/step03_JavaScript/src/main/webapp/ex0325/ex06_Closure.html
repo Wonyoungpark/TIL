@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3> Closure : 클로저는 내부함수에서 외부함수의 범위에 대한 접근 제공!</h3>
+
+<script type="text/javascript">
+  let i=20;
+  let j=100;
+  
+  function outer(){
+	  let i=10;
+	  console.log("j=" +j);
+	 /* function inner(){
+		  console.log(i);
+	  }
+	  
+	  inner();//호출 */
+	  
+	  return function inner(){
+		  console.log(i);//outer쪽의 변수접근
+	  };
+  }
+  
+  //함수 호출해보자
+  console.log("-------");
+ const re = outer(); //re는 함수가 저장된다.
+ console.log("-------");
+ console.log(re);
+ console.log("---호출--");
+ re();
+ 
+ 
+
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>Nullish </h3>
+<script type="text/javascript">
+  //false - false, 0, null, undefined , NaN, '';
+  {
+	  const name="hee";
+	  const userName = name || "Guest";
+	  
+	  console.log(userName);//hee
+  }
+  
+  {
+	  const name="";
+	  const userName = name || "Guest";
+	  
+	  console.log(userName);
+  }
+  
+  {
+	  const name=0;
+	  const userName = name || "Guest";
+	  
+	  console.log(userName);
+  }
+  
+ console.log("------------------------------");
+  ////Nullish = ?? 적용 - null이거나 undefined인경우에만 false///////////////////////////
+{
+	  const name="hee";
+	  const userName = name ?? "Guest";
+	  
+	  console.log(userName);//hee
+  }
+  
+  {
+	  const name="";
+	  const userName = name ?? "Guest";
+	  
+	  console.log(userName);
+  }
+  
+  {
+	  const name=0;
+	  const userName = name ?? "Guest";
+	  
+	  console.log(userName);
+  }
+  
+  {
+	  const name=null;
+	  const userName = name ?? "Guest";
+	  
+	  console.log(userName);
+  }
+  
+  {
+	  const name=undefined;
+	  const userName = name ?? "Guest";
+	  
+	  console.log(userName);
+  }
+  
+  
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

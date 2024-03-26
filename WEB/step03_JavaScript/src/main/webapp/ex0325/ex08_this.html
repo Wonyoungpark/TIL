@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>this : 호출한 주체에 의해 결정된다!!! </h3>
+<script type="text/javascript">
+ onload = function(){
+	 const student = {
+			name:"hee",
+			print : function(){
+				console.log(this);
+				console.log(this.name);
+				console.log(event.target);
+				
+				console.log("---------------");
+			}
+	 }//studentEnd
+	 
+	 //호출해보자
+	 student.print(); //호출의 주체인 student 출력
+	 
+	 console.log("===함수를 변수에 담아서 호출해보자.======");
+	 const myPrint = student.print ; 
+	 //호출
+	 myPrint(); //window가 생략되어있음 : 주체는 window
+	 
+	 /////이벤트 등록/////////////////////////////
+	 document.getElementById("btn1").onclick = student.print ; 
+	 document.getElementById("btn2").onclick = myPrint
+	 
+	 
+	 document.getElementById("btn3").onclick  = function(){
+		  console.log(this); //button3
+		  console.log(event.target);
+	 };
+	 
+	 document.getElementById("btn4").onclick  = ()=>{ //arrow()은 window가 주체
+		  console.log(this); //window
+		  console.log(event.target);
+	 }
+	 
+	 
+ }//loadEnd
+
+</script>
+
+<button id="btn1"> 버튼1 </button>
+<button id="btn2"> 버튼2 </button>
+
+<button id="btn3"> 버튼3 </button>
+<button id="btn4"> 버튼4 </button>
+
+
+</body>
+</html>
+
+

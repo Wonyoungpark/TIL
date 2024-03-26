@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Spread 연산자</h2>
+<script type="text/javascript">
+{
+  const arr1 = [1,2,3];
+  const arr2 = [...arr1];
+  
+  arr2.push(4);//끝에 추가
+  
+  console.log("arr1 = " + arr1);
+  console.log("arr2 = " + arr2);
+}
+///////////////////////////////////////
+console.log("================");
+{
+  const arr1 = [1,2,3];
+  const arr2 = arr1;
+  
+  arr2.push(4);//끝에 추가
+  
+  console.log("arr1 = " + arr1);
+  console.log("arr2 = " + arr2);
+}
+//////배열안에 객체 가 있는경우////////////////////////////////
+console.log("================");
+{
+   const arr1 = [{name:"희정", age:20} ,{name:"미미", age:30}];
+   const arr2 = [...arr1];//복사
+   
+   arr2[0].name="나영";
+   arr2.push(50);//
+   
+   console.log( arr1);
+   console.log(arr2);
+}
+///배열이 아닌 Object도 복사 해보자 //////////////////////////////////////
+{
+   const obj1 = {name:"효리", age:20};	
+   const obj2 = {...obj1};
+   
+   obj2.name="이뿌니";
+   
+   console.log(obj1);
+   console.log(obj2);
+}
+///////////////////////////////////////////////////////
+{
+  const arr1 = [10,20,30];
+  const arr2 = [0,5, ...arr1 , 40, 50];  //   0 5 20  30 40 50 
+  const arr3 = [0, ...arr1.slice(1,3) ];
+  
+  console.log(arr1);
+  console.log(arr2);
+  console.log(arr3);
+  
+  //두개의 배열을 하나로 합치기
+  const arr4 = [...arr2 , ...arr3];
+  console.log(arr4);
+}
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Destructuring - 구조분해할당</h2>
+<script type="text/javascript">
+
+ {
+  const emp = {empno:100, ename:"hee", job :"teacher"}; //객체 
+  
+  const empno = emp.empno;
+  const ename = emp.ename;
+  const job = emp.job;
+  
+  console.log(empno +" | " + ename +" | " + job)
+  
+ } 
+ //////////////////////////////////////
+ {
+	const emp = {empno:200, ename:"jang", job :"instructor"}; //객체 
+	
+	const {empno, ename, job} = emp;//emp객체의 key와 동일한 이름변수로 선언
+	
+	console.log(empno +" | " + ename +" | " + job);
+		 
+ }
+ /////선언하는 변수이름을 key을 다르게 하고싶다. ///////////////////////////////////////
+ 
+ {
+	const emp = {empno:300, ename:"jang", job :"instructor"}; //객체 
+	
+	const {empno:no, ename:name, job} = emp;//emp객체의 key와 동일한 이름변수로 선언
+	
+	console.log(no +" | " + name +" | " + job);
+		 
+ }
+  
+ ////배열에서 사용해보자 //////////////////////////////
+  {
+	 const jobs = ["학생","강사"];
+	 const first = jobs[0];
+	 const second = jobs[1];
+	 
+	 console.log(first +" | " + second );
+  }
+
+ ///// 위 형식을 구조분해 할당으로 변경해보자 //////////////////////////////////////////////
+  {
+	 const jobs = ["백수","백조"];
+	 const [first, second] = jobs;
+	 
+	 console.log(first +" | " + second );
+  }
+ 
+</script>
+
+</body>
+
+
+
+
+
+
+</html>
