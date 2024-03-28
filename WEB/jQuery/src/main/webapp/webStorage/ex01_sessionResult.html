@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+
+            function getInfo(){
+                let str  = "저장된 개수 : ";
+                let len = sessionStorage.length;
+                str += len+"<br>";
+
+                for(let i=0;i<len;i++){
+                    let name = sessionStorage.key(i);
+                    let value = sessionStorage.getItem(name);
+                    str += name+" : "+value+"<br>";
+                }
+
+                $("#result").html(str);
+            }
+            getInfo();
+
+            // 삭제
+            $("#btnClear").click(function (){
+                let name = prompt("삭제할 key 입력");
+                sessionStorage.removeItem(name);
+                getInfo();
+            })
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

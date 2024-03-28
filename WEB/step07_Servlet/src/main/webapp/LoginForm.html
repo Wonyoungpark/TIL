@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
 </head>
 <body>
-$END$
+<h2> 회원 인증 Page : GET</h2>
+
+<form method="get" action="login">
+    ID : <input type="text" name="userId" /><br/>
+    PWD : <input type="password" name="userPwd" /></br/>
+    NAME : <input type="text" name="userName" /></br/>
+
+    <input type="submit" value="로그인" />
+</form>
+
+<h2> 회원 인증 Page : POST</h2>
+
+<form method="post" action="login">
+    ID : <input type="text" name="userId" /><br/>
+    PWD : <input type="password" name="userPwd" /></br/>
+    NAME : <input type="text" name="userName" /></br/>
+
+    <input type="submit" value="로그인" />
+</form>
+
 </body>
 </html>
