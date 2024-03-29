@@ -25,4 +25,37 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BloodServlet</servlet-name>
+        <servlet-class>ex0328.servlet.BloodServlet</servlet-class>
+        <load-on-startup>1</load-on-startup> <!-- 서버 start 시 생성-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BloodServlet</servlet-name>
+        <url-pattern>/blood</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HobbyServlet</servlet-name>
+        <servlet-class>ex0328.servlet.HobbyServlet</servlet-class>
+        <load-on-startup>1</load-on-startup> <!-- 서버 start 시 생성-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HobbyServlet</servlet-name>
+        <url-pattern>/exam/hobby</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SendServlet</servlet-name>
+        <servlet-class>ex0328.servlet.SendServlet</servlet-class>
+        <load-on-startup>1</load-on-startup> <!-- 서버 start 시 생성-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SendServlet</servlet-name>
+        <url-pattern>/BE_WS_01/params</url-pattern>
+    </servlet-mapping>
 </web-app>
