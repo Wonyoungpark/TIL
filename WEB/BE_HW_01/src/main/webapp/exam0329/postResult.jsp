@@ -22,23 +22,14 @@
     이름 : <%=user.getName()%><br>
     이메일 : <%=user.getEmail()%><br>
     성별 : <%=user.getGender()%><br>
-    취미 : <%=
-for(String h:user.getHobbys()){
-%>
-    <input type="checkbox" name="hobby" value="<%=h%>"> <%=h%>
-    <%
-        }
-    %><br>
-    좋아하는 것 : <%=user
-    .
-    getFavorites
-    (
-    )%><br>
-    기타 : <%=user
-    .
-    getDesc
-    (
-    )%><br>
+    취미 : <%
+            for (String h : user.getHobbys()) {
+        %>
+        <input type="checkbox" value="<%=h%>"><%=h%>
+        <%
+            }%><br>
+    좋아하는 것 : <%=user.getFavorites()%><br>
+    기타 : <%=user.getDesc()%><br>
 </h3>
 </body>
 </html>

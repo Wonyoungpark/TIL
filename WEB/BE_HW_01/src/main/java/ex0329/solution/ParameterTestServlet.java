@@ -35,7 +35,7 @@ public class ParameterTestServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
@@ -48,5 +48,13 @@ public class ParameterTestServlet extends HttpServlet {
         // 속성들을 하나의 객체로 저장
         UserVO user = new UserVO(name,email,gender, hobbys,favorite,desc);
 
+//        결과 뷰로 이동할 때, [UserVO객체 + message + 결과 정보] 갖고 이동
+//        request 영역에 저장
+        request.setAttribute("user",user);
+        request.setAttribute("message","메세지");
+        request.setAttribute("info","등록 완료");
+
+//        저장 후, 뷰 페이지로 이동
+        request.getRequestDispatcher("exam0329/postResult.jsp").forward(request,response);
     }
 }
