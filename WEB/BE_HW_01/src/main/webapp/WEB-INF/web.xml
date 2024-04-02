@@ -15,4 +15,9 @@
         <url-pattern>/exam0329/params</url-pattern>
     </servlet-mapping>
 
+<!--    세션 1분 타임아웃  -->
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
 </web-app>
