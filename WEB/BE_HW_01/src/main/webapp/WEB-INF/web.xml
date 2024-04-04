@@ -4,6 +4,19 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
+<!--    context-param : 전체 서블릿에 대한 설정-->
+<!--    init-param : 각각의 서블릿에 대한 설정-->
+<!--    ServletContext 영역에서 init-param을 전달하여 모든 servlet&jsp에서 사용-->
+    <context-param>
+        <param-name>message</param-name>
+        <param-value>ServletContext Field</param-value>
+    </context-param>
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>KOSTA</param-value>
+    </context-param>
+
+
     <servlet>
         <servlet-name>ParameterTestServlet</servlet-name>
         <servlet-class>ex0329.solution.ParameterTestServlet</servlet-class>
@@ -19,5 +32,24 @@
     <session-config>
         <session-timeout>1</session-timeout>
     </session-config>
+    
+    
+    <servlet>
+        <servlet-name>initParamServlet</servlet-name>
+        <servlet-class>ex0404.servlet.initParamServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <init-param>
+            <param-name>dbId</param-name>
+            <param-value>hong</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dpPwd</param-name>
+            <param-value>1234</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>initParamServlet</servlet-name>
+        <url-pattern>/initParam</url-pattern>
+    </servlet-mapping>
 
 </web-app>
