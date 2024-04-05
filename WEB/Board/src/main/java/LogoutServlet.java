@@ -1,5 +1,3 @@
-package ex0401.servlet;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +14,6 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();//모든 세션정보 삭제
-        response.sendRedirect("EL_JSTL/session/LoginForm.html");
+        response.sendRedirect("index.jsp");
     }
 }
