@@ -10,7 +10,7 @@
 				"host": "localhost",
 				"port": "1521",
 				"database": "ORCL",
-				"url": "jdbc:oracle:thin:@n0oqo206i9w839bd_high?TNS_ADMIN\u003d/Users/holly/workspace/Wallet_N0OQO206I9W839BD",
+				"url": "jdbc:oracle:thin:@n0oqo206i9w839bd_high?TNS_ADMIN=/Users/holly/workspace/Wallet_N0OQO206I9W839BD",
 				"configurationType": "URL",
 				"type": "dev",
 				"closeIdleConnection": true,
@@ -38,7 +38,18 @@
 					"@dbeaver-connection-type@": "BASIC",
 					"@dbeaver-sid-service@": "SERVICE"
 				},
-				"auth-model": "oracle_native"
+				"auth-model": "oracle_native",
+				"handlers": {
+					"socks_proxy": {
+						"type": "PROXY",
+						"enabled": true,
+						"save-password": true,
+						"properties": {
+							"socks-host": "",
+							"socks-port": 1080
+						}
+					}
+				}
 			}
 		},
 		"oracle_thin-18dd3d357f5-453057ff4dd02252": {
@@ -110,7 +121,7 @@
 				"host": "localhost",
 				"port": "1521",
 				"database": "ORCL",
-				"url": "jdbc:oracle:thin:@kosinovation_high?TNS_ADMIN\u003d/Users/holly/workspace/KOS-INOVATION/Wallet_KOSINOVATION",
+				"url": "jdbc:oracle:thin:@kosinovation_high?TNS_ADMIN=/Users/holly/workspace/KOS-INOVATION/Wallet_KOSINOVATION",
 				"configurationType": "URL",
 				"type": "dev",
 				"closeIdleConnection": true,
@@ -135,7 +146,7 @@
 			"auto-close-transactions": true,
 			"close-transactions-period": 1800,
 			"auto-close-connections": true,
-			"close-connections-period": 3600
+			"close-connections-period": 14400
 		}
 	}
 }

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/logout", loadOnStartup = 1)
 public class LogoutServlet extends HttpServlet {
@@ -14,6 +15,10 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();//모든 세션정보 삭제
-        response.sendRedirect("index.jsp");
+
+        PrintWriter out = response.getWriter();
+        out.println("<script>");
+        out.println("top.location.href='index.jsp';");
+        out.println("</script>");
     }
 }

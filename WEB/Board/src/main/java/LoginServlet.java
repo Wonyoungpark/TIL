@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
+import java.util.Date;
 
 @WebServlet(urlPatterns = "/login", loadOnStartup = 1, initParams = {
         @WebInitParam(name = "dbId", value = "hong"),
@@ -17,44 +17,29 @@ import java.util.Calendar;
 public class LoginServlet extends HttpServlet {
     private String dbId,dbPwd;
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String userId = request.getParameter("userId");
         String userPwd = request.getParameter("userPwd");
-        String userName = request.getParameter("userName");
+
+        PrintWriter out = response.getWriter();
 
         if (dbId.equals(userId) && dbPwd.equals(userPwd)) {
             HttpSession session = request.getSession();
             session.setAttribute("sessionId", userId);
-            session.setAttribute("sessionName", userName);
+            session.setAttribute("creationTime", new Date().toLocaleString());
 
-            //로그인된 시간
-            Calendar cal = Calendar.getInstance();//현재 날짜와 시간 설정
-            int y = cal.get(Calendar.YEAR);
-            int m = cal.get(Calendar.MONTH) + 1;
-            int d = cal.get(Calendar.DATE);
-            int h = cal.get(Calendar.HOUR);
-            int min = cal.get(Calendar.MINUTE);
-            int s = cal.get(Calendar.SECOND);
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(y + "년");
-            sb.append(m + "월");
-            sb.append(d + "일");
-            sb.append(h + "시");
-            sb.append(min + "분");
-            sb.append(s + "초");
-
-            session.setAttribute("creationTime", sb.toString());
-
-            response.sendRedirect("left.jsp"); //session에 저장됐을 때 이동방식은 중요하지 않음 (브라우저만 유지되면 상태는 유지되기 때문)
+            //forward : request에 저장했을 경우 반드시!
+            //redirect : session에 저장했을 경우(세션은 사실 상관없음) : 브라우저만 유지되면 상태는 유지되기 때문
+            out.println("<script>");
+            out.println("top.location.href='index.jsp';"); //top : 전체 창에 index가 열려라의 뜻
+            //만약 location.href='index.jsp'이면, left 부분에 index.jsp가 또 띄워진다. ==left만 refresh된다.
+            out.println("</script>");
         } else {
             response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
             out.println("<script>");
-            out.println("alert('" + userName + "님 정보를 다시 확인해주세요.')");
+            out.println("alert('정보를 다시 확인해주세요.');");
             out.println("history.back();");
             out.println("</script>");
         }

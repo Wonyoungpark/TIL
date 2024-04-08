@@ -1,9 +1,9 @@
 package kosta.dto;
 
 public class BoardDTO {
-   private int no;
-   private String subject;
-   private String content;
+   private int no; //글번호
+   private String subject;//제목
+   private String content; //내용
    
    public BoardDTO() {}
    public BoardDTO(int no, String subject, String content) {
