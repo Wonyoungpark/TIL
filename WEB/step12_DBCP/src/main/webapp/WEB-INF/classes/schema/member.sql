@@ -11,7 +11,6 @@ create table member(
    addr varchar2(50),
    join_date date not null
 )
-
 select * from member;
 --레코드 추가
 insert into member(id,pwd,name,age,phone,addr, join_date)

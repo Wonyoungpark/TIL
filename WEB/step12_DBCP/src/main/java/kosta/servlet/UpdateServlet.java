@@ -11,6 +11,7 @@ import kosta.dao.MemberDAOImpl;
 import kosta.dto.MemberDTO;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/update",loadOnStartup = 1)
 public class UpdateServlet extends HttpServlet {
@@ -41,7 +42,13 @@ public class UpdateServlet extends HttpServlet {
         int result = memberDAO.update(new MemberDTO(id,pwd,age,addr,phone));
 
         if(result == 1) {
-            resp.sendRedirect("read.jsp");
+            resp.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = resp.getWriter();
+            out.println("<script type='text/javascript'>");
+            out.println("alert('성공적으로 수정되었습니다.');");
+            out.println("top.location.href='selectAll'");
+            out.println("</script>");
+//            resp.sendRedirect("selectAll");
         }else{
             req.setAttribute("errMsg","업데이트에 실패했습니다. 다시 시도해주세요.");
             RequestDispatcher rd = req.getRequestDispatcher("error.jsp");

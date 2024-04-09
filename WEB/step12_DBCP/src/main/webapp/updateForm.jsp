@@ -25,7 +25,7 @@
    <caption><h2> 수정 Form</h2></caption>
   <tr>
 	<td width="100px">ID</td>
-	<td width="400px"><input type="text" name="id" value="${requestScope.member.id}" disabled /></td>
+	<td width="400px"><input type="text" name="id" value="${requestScope.member.id}" readonly /></td>
   </tr>
   <tr>
 	<td>PWD</td>
@@ -33,7 +33,7 @@
   </tr>
   <tr>
 	<td>NAME</td>
-	<td><input type="text" name="name" value="${requestScope.member.name}" disabled/></td>
+	<td><input type="text" name="name" value="${requestScope.member.name}" readonly/></td>
   </tr>
   <tr>
 	<td>age</td>

@@ -114,7 +114,7 @@ public class MemberDAOImpl implements MemberDAO {
     public int update(MemberDTO memberDTO) {
         Connection conn = null;
         PreparedStatement ps = null;
-        String sql = "update member set pwd = ?, age=?, addr=?,phone=? where id = ?";
+        String sql = "update member set pwd=?, age=?, addr=?, phone=? where id = ?";
         int result = 0;
 
         try {
@@ -124,6 +124,7 @@ public class MemberDAOImpl implements MemberDAO {
             ps.setInt(2,memberDTO.getAge());
             ps.setString(3, memberDTO.getAddr());
             ps.setString(4,memberDTO.getPhone());
+            ps.setString(5,memberDTO.getId());
             result = ps.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
