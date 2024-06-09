@@ -27,9 +27,17 @@ public class ElectronicsController implements Controller {
     public ModelAndView select(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Electronics Controller select");
 
+        String pageNo = request.getParameter("pageNo");
+        if (pageNo != null || pageNo.equals("")) {
+            pageNo = "1";
+        }
+
         try {
-            List<Electronics> list = electronicsService.selectAll();
+//            List<Electronics> list = electronicsService.selectAll();
+
+            List<Electronics> list = electronicsService.selectAll(Integer.parseInt(pageNo));
             request.setAttribute("list", list);
+            request.setAttribute("pageNo", pageNo);
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -68,6 +76,14 @@ public class ElectronicsController implements Controller {
 
     public ModelAndView selectByModelNum(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Electronics Controller selectByModelNum");
+        String modelName = request.getParameter("model_name");
+        String price = request.getParameter("price");
+        String description = request.getParameter("description");
+        String password = request.getParameter("password");
+
+//        Electronics elec = new Electronics(modelName,price,description,password);
+//        Part part = request.getPart("file");
+
 
         try {
             Electronics electronics = electronicsService.selectByModelnum(request.getParameter("modelNum"),true);

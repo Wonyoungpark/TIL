@@ -1,6 +1,7 @@
 package dao;
 
 import dto.Electronics;
+import paging.PageCnt;
 import util.DbUtil;
 
 import java.io.IOException;
@@ -50,11 +51,26 @@ public class ElectronicsDAOImpl implements ElectronicsDAO{
         ResultSet rs = null;
         List<Electronics> list = new ArrayList<Electronics>();
         String sql = proFile.getProperty("query.pagingSelect");
+
         try {
             con = DbUtil.getConnection();
+            con.setAutoCommit(false); //자동 커밋 해제
+
+            int totalCount = this.getTotalCount(con); //전체 게시물 수 저장
+
+            //전체 페이지 수
+            int totalPage = totalCount%pageNo==0 ? totalCount/ PageCnt.pagesize : totalCount/PageCnt.pagesize+1;
+
+            PageCnt pageCnt = new PageCnt();
+            pageCnt.setPageCnt(totalPage);
+            pageCnt.setPageNo(pageNo);
+
             ps = con.prepareStatement(sql);
-            ps.setInt(1, pageNo);
+
+            ps.setInt(1, (pageNo-1)*pageCnt.pagesize+1); //시작
+            ps.setInt(2, pageNo*pageCnt.pagesize); //끝
             rs = ps.executeQuery();
+
             while (rs.next()) {
                 Electronics e = new Electronics(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),
                         rs.getString(5),rs.getString(6),rs.getInt(7),rs.getString(8),rs.getInt(9) );
@@ -64,6 +80,10 @@ public class ElectronicsDAOImpl implements ElectronicsDAO{
             DbUtil.dbClose(con, ps, rs);
         }
         return list;
+    }
+
+    private int getTotalCount(Connection con) {
+        return 0;
     }
 
     @Override
