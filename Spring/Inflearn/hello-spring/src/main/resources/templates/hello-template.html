@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<p th:text="'hello '+${name}">hello! empty</p>
+<!-- 서버 없이 그냥 html일 때, hello! empty가 출력 -->
+<!-- 템플릿엔진이 동작하면 ${name} 값으로 empty가 치환 -->
+</body>
+</html>
